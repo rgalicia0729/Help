@@ -23,3 +23,53 @@ Una vez se instala todo entra a la carpeta src donde estará todo el código fue
 
 Finalmente para correr la aplicación se usa el comando
 * npm run start
+
+## ReactDOM.render
+
+    React y ReactDOM trabajarán en conjunto.
+        React como análogo a createElement
+        ReactDOM a appendChild
+
+    ReactDOM.render() toma dos argumentos: Qué queremos renderizar y dónde lo queremos renderizar.
+
+    Siempre que escribas JSX es requisito importar React.
+
+## JSX
+
+JSX es una extensión de JavaScript creada por Facebook para el uso con la biblioteca React. Sirve de preprocesador (como Sass o Stylus a CSS) y transforma el código generado con React a JavaScript.
+
+JSX tiene su alternativa que es React.createElement pero es preferible JSX porque es mucho más legible y expresivo. Ambos tienen el mismo poder y la misma capacidad.
+
+React.createElement recibe 3 argumentos:
+
+    1. El tipo de elemento que estamos creando
+    2. sus atributos o props
+    3. y el children que es el contenido.
+
+Ejemplo:
+React.createElement(‘a’, { href: ‘https://platzi.com’ }, ‘Ir a Platzi’);
+
+En JSX se utilizan las llaves para introducir variables o expresiones de Javascript. Lo que sea que esté adentro se va a evaluar y su resultado se mostrará en pantalla.
+
+Las expresiones pueden ser llamadas a otras funciones, cálculos matemáticos, etc. Si las expresiones son false, 0, null, undefined, entre otros, no se verán.
+
+## ¿Qué es un componente?
+
+Los componentes en React son bloques de construcción.
+Las aplicaciones hechas con React son como figuras de Lego. Junta varias piezas (componentes) y puedes construir un website tan pequeño o tan grande como quieras.
+Los componentes serán barras de búsquedas, enlaces, encabezados, el header, etc.
+
+”Componente” vs “elemento
+Un elemento es a un objeto como un componente es a una clase. Si el elemento fuera una casa, el componente serían los planos para hacer esa casa.
+
+Identificación de componentes
+Para identificarlos debes hacerte las siguientes preguntas:
+
+* ¿Qué elementos se repiten? Estos son los elementos en una lista o los que comparten aspecto visual y su funcionalidad
+* ¿Qué elementos cumplen una función muy específica? Estos sirven para encapsular la lógica y permiten juntar muchos comportamientos y aspectos visuales en un solo lugar.
+
+Identificar componentes es una habilidad esencial para poder desarrollar aplicaciones de React.
+
+* Es una buena práctica que los componentes vivan en su propio archivo y para ello se les crea una carpeta.
+* Todos los componentes requieren por lo menos el método render que define cuál será el resultado que aparecerá en pantalla.
+* El source de las imágenes en React puede contener direcciones en la web o se le puede hacer una referencia directa importándola. Si se importa deben usarse llaves para que sea evaluado.
