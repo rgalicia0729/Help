@@ -87,3 +87,9 @@ Identificar componentes es una habilidad esencial para poder desarrollar aplicac
 Los props que es la forma corta de properties son argumentos de una función y en este caso serán los atributos de nuestro componente como class, src, etc.
 
 Estos props salen de una variable de la clase que se llama this.props y los valores son asignados directamente en el ReactDOM.render().
+
+Las páginas en React son componentes conseguir distinguirlas nos servirá para saber que es un componente que adentro lleva otros componentes.
+
+Al escribir los props no importa el orden en el que lo hagas, únicamente importa el nombre.
+
+
