@@ -1,10 +1,10 @@
 # Comandos para trabajar con Git y GitHub
 
 ## Configuración Básica de Git
-git --version
-git config --global user.name
-git config --global user.email
-git config --global color.ui true
+* git --version
+* git config --global user.name
+* git config --global user.email
+* git config --global color.ui true
 
 ## Iniciar un repositorio
 git init nombre_repositorio
@@ -58,9 +58,9 @@ git log --oneline --graph
 git diff sha1 vos sha2
 
 ## Resetear commit 
-git reset --soft sha1
-git reset --mixed sha1
-git reset --hard sha1
+* git reset --soft sha1
+* git reset --mixed sha1
+* git reset --hard sha1
 
 ## Configurar un editor de texto
 git config --global core.editor nombre_editor
