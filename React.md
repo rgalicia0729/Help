@@ -172,6 +172,23 @@ Cuando React renderiza los componentes decimos que entran en escena, cuando su e
 * Nos da la oportunidad de hacer limpieza de nuestro componente.
 * Se llama un método: componentWillUnmount.
 
+### Metodos del ciclo de vida
+
+    constructor (props) { super(props) }
+    render () {}
+    componentDidMount () {}
+
+## Introducción llamadas a un API
+
+Las llamadas a una API siguen un patrón similar siempre que las hacemos, cada llamada consta de tres estados:
+* Loading: cuando la petición se envía y estamos esperando.
+* Error: se debe dejar un mensaje para el usuario para arreglar el error o volver a intentarlo.
+* Data: los datos nos pueden llegar de dos formas, o en error o con los datos requeridos.
+
+## React.js: Cómo traer datos de un API en React
+
+Una llamada a una API es un proceso asíncrono, es decir que lo comenzamos pero no sabemos cuándo acabará. Por lo mismo la función a escribir debe ser asíncrona.
+La llamada se hará usando fetch que es una función de React que al pasarle una dirección de internet, hará una petición GET y lo que sea que exista ahí será devuelto.
 
 
 
