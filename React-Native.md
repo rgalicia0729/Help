@@ -12,4 +12,10 @@
 
 ## Iniciar un nuevo proyecto
     
-    react-native nombreDelProyecto
+    react-native init nombreDelProyecto
+
+## Para correr el proyecto
+
+    react-native run-ios
+    ó
+    react-native run-android
