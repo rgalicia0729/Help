@@ -3,11 +3,19 @@
 Vamos a conocer algunos trucos de nuestra consola para explorar el estado del docker
 Para listar todos los contenedores de Docker, utilizamos el comando:
 
-  docker ps -a
+* docker ps -a
   
 Podemos inspeccionar un contenedor en específico utilizando:
 
-  docker inspect nombreDelContenedor
+* docker inspect nombreDelContenedor
+  
+## Exponiendo contenedores al mundo exterior
+
+Los contenedores están aislados del sistema y a nivel de red, cada contenedor tiene su propia stack de net y sus propios puertos.
+
+Debemos redirigir los puertos del contenedor a los de la computadora y lo podemos hacer al utilizar este comando:
+
+* docker run -d --name server -p 8080:00  nombreDelContenedor
   
 
 # Comandos Basicos de Docker
