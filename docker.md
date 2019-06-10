@@ -1,3 +1,15 @@
+## Explorar el estado de docker
+
+Vamos a conocer algunos trucos de nuestra consola para explorar el estado del docker
+Para listar todos los contenedores de Docker, utilizamos el comando:
+
+  docker ps -a
+  
+Podemos inspeccionar un contenedor en específico utilizando:
+
+  docker inspect nombreDelContenedor
+  
+
 # Comandos Basicos de Docker
 Este documento muestra un listado de los comandos básicos para la administracion de Docker
 
