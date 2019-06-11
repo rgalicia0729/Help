@@ -27,6 +27,15 @@ Para descargar una imagen
 Para mostrar las imagenes descargadas
 * docker image ls
 
+## Construyendo nuestras propias imágenes
+
+Vamos a crear nuestras propias imágenes, necesitamos un archivo llamado DockerFile que es la ““receta”” que utiliza Docker para crear imágenes.
+
+* Es importante que el DockerFile siempre empiece con un ““FROM”” sino, no va a funcionar.
+
+El flujo para construir en Docker siempre es así:
+Dockerfile – **build **–> Imágen – run --> Contenedor
+
 # Comandos Basicos de Docker
 Este documento muestra un listado de los comandos básicos para la administracion de Docker
 
