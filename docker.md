@@ -16,7 +16,16 @@ Los contenedores están aislados del sistema y a nivel de red, cada contenedor t
 Debemos redirigir los puertos del contenedor a los de la computadora y lo podemos hacer al utilizar este comando:
 
 * docker run -d --name server -p 8080:00  nombreDelContenedor
-  
+
+## Conceptos fundamentales de Docker: imágenes
+Las imágenes son un componente fundamental de Docker y sin ellas los contenedores no tendrían sentido. Estas imágenes son fundamentalmente plantillas o templates.
+Algo que debemos tener en cuenta es que las imágenes no van a cambiar, es decir, una vez este realizada no la podremos cambiar.
+
+Para descargar una imagen
+* docker pull nombreDeImagen
+
+Para mostrar las imagenes descargadas
+* docker image ls
 
 # Comandos Basicos de Docker
 Este documento muestra un listado de los comandos básicos para la administracion de Docker
