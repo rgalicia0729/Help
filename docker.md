@@ -3,118 +3,149 @@
 Vamos a conocer algunos trucos de nuestra consola para explorar el estado del docker
 Para listar todos los contenedores de Docker, utilizamos el comando:
 
-* docker ps -a
-  
+    docker ps -a
+
 Podemos inspeccionar un contenedor en específico utilizando:
 
-* docker inspect nombreDelContenedor
-  
+    docker inspect nombreDelContenedor
+
 ## Exponiendo contenedores al mundo exterior
 
 Los contenedores están aislados del sistema y a nivel de red, cada contenedor tiene su propia stack de net y sus propios puertos.
 
 Debemos redirigir los puertos del contenedor a los de la computadora y lo podemos hacer al utilizar este comando:
 
-* docker run -d --name server -p 8080:00  nombreDelContenedor
+    docker run -d --name server -p 8080:00  nombreDelContenedor
 
 ## Conceptos fundamentales de Docker: imágenes
+
 Las imágenes son un componente fundamental de Docker y sin ellas los contenedores no tendrían sentido. Estas imágenes son fundamentalmente plantillas o templates.
 Algo que debemos tener en cuenta es que las imágenes no van a cambiar, es decir, una vez este realizada no la podremos cambiar.
 
 Para descargar una imagen
-* docker pull nombreDeImagen
+
+    docker pull nombreDeImagen
 
 Para mostrar las imagenes descargadas
-* docker image ls
+
+    docker image ls
 
 ## Construyendo nuestras propias imágenes
 
 Vamos a crear nuestras propias imágenes, necesitamos un archivo llamado DockerFile que es la ““receta”” que utiliza Docker para crear imágenes.
 
-* Es importante que el DockerFile siempre empiece con un ““FROM”” sino, no va a funcionar.
+Es importante que el DockerFile siempre empiece con un ““FROM”” sino, no va a funcionar.
 
 El flujo para construir en Docker siempre es así:
 Dockerfile – **build **–> Imágen – run --> Contenedor
 
 # Comandos Basicos de Docker
+
 Este documento muestra un listado de los comandos básicos para la administracion de Docker
 
-# Aprendiendo a utilizar los contenedores
+## Aprendiendo a utilizar los contenedores
 
-## Iniciar un nuevo contenedor
-docker run "nombre_imagen" 
+Iniciar un nuevo contenedor
 
-## Verificar el estado de los contenedores
-docker ps
+    docker run "nombre_imagen"
 
-## Verificar el estado de todos los contenedores
-docker ps -a
+Verificar el estado de los contenedores
 
-## Inspeccionar un contenedor de docker, muestra toda la metadata del mismo
-docker inspect "id del contenedor | nombre del contenedor"
+    docker ps
 
-## Inspeccionar un docker solicitando un elemento en particular de la metadata con un filtro
-docker inspect -f '{{ json.config.env }}' "Nombre del contenedor"
+Verificar el estado de todos los contenedores
 
-## Para renombrar un contenedor
-docker rename "nombre actual" "nombre nuevo"
+    docker ps -a
 
-## Iniciar un contenedor con nombre personalizado
-docker run --name "nombre del contenedor" "nombre de la imagen"
+Inspeccionar un contenedor de docker, muestra toda la metadata del mismo
 
-## Mostrar el output del contenedor
-docker logs "nombre del contenedor | id del contenedor"
+    docker inspect "id del contenedor | nombre del contenedor"
 
-## Eliminar un contenedor
-docker rm "nombre del contenedor | id del contenedor"
+Inspeccionar un docker solicitando un elemento en particular de la metadata con un filtro
 
-## Listar el id de todos los contenedores
-docker ps -aq
+    docker inspect -f '{{ json.config.env }}' "Nombre del contenedor"
 
-## Eliminar varios contenedores
-docker rm $(docker ps -aq)
+Para renombrar un contenedor
+  
+ docker rename "nombre actual" "nombre nuevo"
 
-## Instalar un ubuntu linux en docker
-docker run ubuntu
+Iniciar un contenedor con nombre personalizado
+  
+ docker run --name "nombre del contenedor" "nombre de la imagen"
 
-## Ejecutar el servicio de ubuntu linux
-docker run -it ubuntu
+Mostrar el output del contenedor
 
-## Ejecutar un contenedor existente
-docker exec -it "nombre del contenedor" bash
+    docker logs "nombre del contenedor | id del contenedor"
 
-## Starting a MySQL Server Instance
-docker run --name=mysql1 -d mysql/mysql-server
+Eliminar un contenedor
+
+    docker rm "nombre del contenedor | id del contenedor"
+
+Listar el id de todos los contenedores
+
+    docker ps -aq
+
+Eliminar varios contenedores
+
+    docker rm $(docker ps -aq)
+
+Instalar un ubuntu linux en docker
+
+    docker run ubuntu
+
+Ejecutar el servicio de ubuntu linux
+
+    docker run -it ubuntu
+
+Ejecutar un contenedor existente
+
+    docker exec -it "nombre del contenedor" bash
+
+Starting a MySQL Server Instance
+
+    docker run --name=mysql1 -d mysql/mysql-server
+
 - [x] Referencia:
+
 1. https://dev.mysql.com/doc/mysql-installation-excerpt/5.5/en/docker-mysql-getting-started.html
 2. https://docs.bluehosting.cl/tutoriales/servidores/como-crear-un-nuevo-usuario-y-otorgar-permisos-en-mysql.html
 
-## Exponer un contenedor al exterior
-docker run -d --name "nombre del contenedor" -p "puerto del sistema operativo":"puerto del contenedor" "nombre de la imagen"
+Exponer un contenedor al exterior
 
-## Starting mongodb
-docker run -d -p 27017:27017 --name mongodb mongo
+    docker run -d --name "nombre del contenedor" -p "puerto del sistema operativo":"puerto del contenedor" "nombre de la imagen"
 
-## Ejecutar bash para conectarse al cliente de mongo
-docker exec -it mongodb bash
+Starting mongodb
 
-## configurar un directorio externo al contenedor para almacenar los datos de mongo
-docker run -b -p 27017:27017 --name mongodb -v "path":/data/db mongo
+    docker run -d -p 27017:27017 --name mongodb mongo
 
-## Para correr la imagen generada en el curso de Java Spring
-docker run -d --name "Nombre del contenedor" --add-host=mysql_server:"ip del servidor de base de datos" -p 8080:8080 "Nombre de la Imagen":latest
+Ejecutar bash para conectarse al cliente de mongo
 
-## Verificar el log de la ejecucion del programa
-docker logs -f "Nombre de la Imagen"
+    docker exec -it mongodb bash
 
-## Ver los Volumenes creados por los contenedores que se han corrido
-docker volume ls
+configurar un directorio externo al contenedor para almacenar los datos de mongo
 
-## Eliminar los volumenes que no se estan utilizando
-docker volume prune
+    docker run -b -p 27017:27017 --name mongodb -v "path":/data/db mongo
 
-## Crear un volumen
-docker volume create "nombre del volumen"
+Para correr la imagen generada en el curso de Java Spring
 
-## Ejecuta un contenedor de mongo y almacena el contenido en el volumen creado
-docker run -d -p 27017:27017 --name mongodb --mount src="nombre del volumen creado",dst=/data/db mongo
+    docker run -d --name "Nombre del contenedor" --add-host=mysql_server:"ip del servidor de base de datos" -p 8080:8080 "Nombre de la Imagen":latest
+
+Verificar el log de la ejecucion del programa
+
+    docker logs -f "Nombre de la Imagen"
+
+Ver los Volumenes creados por los contenedores que se han corrido
+
+    docker volume ls
+
+Eliminar los volumenes que no se estan utilizando
+
+    docker volume prune
+
+Crear un volumen
+
+    docker volume create "nombre del volumen"
+
+Ejecuta un contenedor de mongo y almacena el contenido en el volumen creado
+
+    docker run -d -p 27017:27017 --name mongodb --mount src="nombre del volumen creado",dst=/data/db mongo
