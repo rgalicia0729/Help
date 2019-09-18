@@ -44,7 +44,7 @@ Agregar una configuración de EsLint para el diseño del codigo, para esto cream
 }
 ```
 
-Luego vamos aconfigurar prettier para formatear nuestro codigo, de la siguiente manera:
+Luego vamos aconfigurar prettier para formatear nuestro codigo, creando un archivo en la raiz del proyecto con el nombre de .prettierrc y le agregamos la siguiente configuración:
 
 ```json
 {
@@ -62,10 +62,42 @@ Vamos a instalar una dependencia para manejo de variables de entorno llamada dot
 
     npm i -S dotenv
 
-Luego vamos a instalar las dependencias de desarrollo, estaso son dependencias que solo se van a utilizar miestras estamos desarrollando nuestro proyecto, vamos a instalar las siguientes.
+Luego vamos a instalar las dependencias de desarrollo, estas son dependencias que solo se van a utilizar miestras estamos desarrollando nuestro proyecto, vamos a instalar las siguientes.
 
     npm i -D nodemon eslint eslint-config-prettier eslint-plugin-prettier prettier
 
 Para que nuestro codigo realice el formateo automatico cada vez que se hace commit y se sube al repositorio vamos a instalar un hook:
 
     npx mrm lint-staged
+
+Ya tenemos todo configurado, ahora vamos a iniciar con nuestro proyecto.
+
+Vamos a crear un archivo de configuración, en un directorio llamado config vamos a crear un archivo con el nombre de index.js y vamos agregar lo siguiente, esto para cargar variables de entorno.
+
+```javascript
+require("dotenv").config();
+
+const config = {
+  dev: process.env.NODE_ENV !== "production",
+  port: process.env.PORT || 3000,
+};
+
+module.exports = { config };
+```
+
+Ahora vamos a crear un servidor con express, ejemplo de hola mundo.
+
+```javascript
+const express = require("express");
+const app = express();
+
+const { config } = require("./config");
+
+app.get("/", function(req, res) {
+  res.json({ saludo: "Hola Mundo" });
+});
+
+app.listen(config.port, function() {
+  console.log(`Listening http://localhost:${config.port}`);
+});
+```
