@@ -101,3 +101,113 @@ app.listen(config.port, function() {
   console.log(`Listening http://localhost:${config.port}`);
 });
 ```
+
+# Como crear una API con Restful
+
+## Anatomía de una API Restful
+
+REST (Representational State Transfer) es un estilo de arquitectura para construir web services, no es un estándar pero si una especificación muy usada.
+
+Las peticiones HTTP van acompañadas de un “verbo” que define el tipo de petición:
+
+- GET. Lectura de datos.
+- PUT. Reemplazar datos.
+- PATCH. Actualizar datos en un recurso específico.
+- POST. Creación de datos.
+- DELETE. Eliminación de datos.
+
+No es recomendable habilitar un endpoint de tipo PUT y DELETE para toda nuestra colección de datos, sólo hacerlos para recursos específicos, ya que no queremos que por error se puedan borrar todos nuestros datos.
+
+Es una buena practica crear un directorio de routes y dentro de este directorio vamos a crear un archivo llamado movies.js, puedes ver un ejemplo de como crear un CRUD, moviesMocks es solo un archivo que continene la información falsa de peliculas en formato JSON.
+
+```javascript
+const express = require("express");
+const moviesMocks = require("../utils/mocks/movies");
+
+function moviesApi(app) {
+  const router = express.Router(app);
+  app.use("/api/movies", router);
+
+  /**
+   * Endpoint para listar todas las peliculas
+   */
+  router.get("/", async function(req, res, next) {
+    try {
+      const movies = await Promise.resolve(moviesMocks);
+
+      res.status(200).json({
+        data: movies,
+        message: "Peliculas encontradas exitosamente",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  /**
+   * Endpoint para listar una pelicula por id
+   */
+  router.get("/movieId", async function(req, res, next) {
+    try {
+      const movie = await Promise.resolve(moviesMocks[1]);
+
+      res.status(200).json({
+        data: movie,
+        message: "Pelicula encontrada exitosamente",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  /**
+   * Endpoint para crear una nueva pelicula
+   */
+  router.post("/", async function(req, res, next) {
+    try {
+      const createMovieId = await Promise.resolve(moviesMocks[0].id);
+
+      res.status(201).json({
+        data: createMovieId,
+        message: "Pelicula creada exitosamente",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  /**
+   * Endpoint para actualizar los datos de una pelicula
+   */
+  router.put("/:movieId", async function(req, res, next) {
+    try {
+      const updateMovieId = await Promise.resolve(moviesMocks[0].id);
+
+      res.status(200).json({
+        data: updateMovieId,
+        message: "Pelicula actualizada exitosamente",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  /**
+   * Endpoint para eliminar una pelicula
+   */
+  router.delete("/:movieId", async function(req, res, next) {
+    try {
+      const deleteMovieId = await Promise.resolve(moviesMocks[0].id);
+
+      res.status(200).json({
+        data: deleteMovieId,
+        message: "Pelicula eliminada exitosamente",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+}
+
+module.exports = moviesApi;
+```
