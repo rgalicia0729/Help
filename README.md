@@ -7,6 +7,7 @@ Aqui encontraras una guia rapida para trabajar con las siguientes tecnologías.
 - Git
 - Docker
 - Deploy con now.sh
+- Seguridad Informatica
 
 ## Generar tu clave privada para conectarse a git
 

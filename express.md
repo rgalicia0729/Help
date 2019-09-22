@@ -211,3 +211,134 @@ function moviesApi(app) {
 
 module.exports = moviesApi;
 ```
+
+## Implementando una capa de servicios
+
+La arquitectura tradicional MVC se queda corta en aplicaciones modernas, por eso necesitamos una arquitectura diferente cómo la Clean Arquitecture que tiene una capa de servicios para manejar la lógica de negocio.
+
+Vamos a crear un directorio llamado services y dentro vamos a crear un archivo llamado movies.js es el que contendra la logia de negocio, siguiendo con el ejemplo de movies la capa de servicios para el CRUD se veria asi:
+
+```javascript
+const moviesMocks = require("../utils/mocks/movies");
+
+class MoviesServices {
+  async getMovies() {
+    const movies = await Promise.resolve(moviesMocks);
+    return movies || [];
+  }
+
+  async getMovie() {
+    const movie = await Promise.resolve(moviesMocks[0]);
+    return movie || {};
+  }
+
+  async createMovie() {
+    const createMovieId = await Promise.resolve(moviesMocks[0].id);
+    return createMovieId;
+  }
+
+  async updateMovie() {
+    const updateMovieId = await Promise.resolve(moviesMocks[0].id);
+    return updateMovieId;
+  }
+
+  async deleteMovie() {
+    const deleteMovieId = await Promise.resolve(moviesMocks[0].id);
+    return deleteMovieId;
+  }
+}
+
+module.exports = MoviesServices;
+```
+
+## Como crear un libreria para conectarse a mongodb
+
+Para conectarse con MongoDB vamos a instalar la libreria de la siguiente manera:
+
+    npm i -S mongodb
+
+# Autenticación con passport
+
+## Stack de seguridad moderno
+
+Anteriormente las compañías se comunicaban mediante un intranet que actualmente ha sido reemplazado con un stack de seguridad moderno usando:
+
+- JSON Web Tokens: Nos permite comunicarnos entre dos clientes de una manera más segura.
+- OAuth 2.0: Un estándar de la industria que nos permite implementar autorización.
+- OpenID Connect: Es una capa de autenticación que funciona por encima de Oauth 2.0.
+
+## ¿Qué es la autenticación y la autorización ?
+
+La autenticación sirve para verificar la identidad de un usuario, verificar si el usuario existe y si los datos que está colocando son correctos.
+
+La autorización es la acción de permitir a un usuario acceso limitado a nuestro recursos.
+
+## Introducción a las sesiones
+
+Cuando visitamos un sitio por primera vez se crea una sesión con los ajustes que se configuran. Por ejemplo, en un sitio web de reserva de hoteles, a medida que buscamos y ponemos preferencias de precios y demás, éstas se irán guardando en dicha sesión. Y luego estos datos se convertirán en un ID que será almacenado en una cookie en tu navegador.
+
+## Anatomía de un JWT
+
+JWT es un estándar de la industria que nos permite manejar demandas de información entre dos clientes.
+
+## Autenticación tradicional vs JWT
+
+Cuando usamos una autenticación tradicional se crea una sesión y el ID de esa sesión se almacena en una cookie del navegador, pero cuando utilizamos JWT firmamos un token y este se guarda en el navegador el cual permite a una SPA actualizarse sin refrescar la ventana.
+
+## Firmando y Verificando nuestro JWT
+
+Para firmar nuestro token utilizaremos un paquete de node llamado jsonwebtoken y al usarlo en nuestro código se verá de esta manera:
+
+```javascript
+jwt.sign({ sub: user.id }, "secret", options);
+```
+
+El primer atributo que recibe es el payload o sea los datos que guardaremos en ese token. De segundo atributo recibe una clave secreta con la cual será firmado y finalmente podremos pasarle opciones si es nuestro caso.
+
+Para verificar nuestro token lo haremos de la siguiente manera:
+
+```javascript
+jwt.verify(token, "secret", function(err, decoded) {});
+```
+
+Como primer atributo recibiremos el token, de segundo atributo el secreto de la firma y como tercer argumento (opcional) recibiremos el token decodificado.
+
+Vamos a inicializar nuestro proyecto con:
+
+    npm init -y
+
+Crearemos el archivo:
+
+    index.js
+
+Vamos a instalar los paquetes necesarios con:
+
+    npm i jsonwebtoken
+
+En el index.js vamos a hacer toda la lógica de nuestra aplicación
+
+```javascript
+const jwt = require("jsonwebtoken");
+
+const [, , option, secret, nameOrToken] = process.argv;
+
+if (!option || !secret || !nameOrToken) {
+  return console.log("Missing Arguments");
+}
+
+function signToken(payload, secret) {
+  return jwt.sign(payload, secret);
+}
+
+function verifyToken(token, secret) {
+  return jwt.verify(token, secret);
+}
+
+if (option == "sign") {
+  console.log(signToken({ sub: nameOrToken }, secret));
+} else if (option == "verify") {
+  console.log(verifyToken(nameOrToken, secret));
+} else {
+  console.log('Option needs to be "sign" or "verify"');
+}
+```
