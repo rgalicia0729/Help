@@ -328,32 +328,6 @@ import Button from "./components/Button";
 ReactDOM.render(<Button text="¡Hola!" />, document.getElementByid("root"));
 ```
 
-## Instalación y configuración de entorno
-
-niciar un proyecto de Node.js
-
-    npm init -y
-
-Instalar React
-
-    npm install --save react react-dom
-
-## Agregando compatibilidad con todos los navegadores usando Babel
-
-Babel es una herramienta muy popular para escribir JavaScript moderno y transformarlo en código que pueda entender cualquier navegador.
-
-Instalación de Babel y otras herramientas para que funcione con React:
-
-    npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
-
-Configuración de Babel (.babelrc):
-
-```json
-{
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
-}
-```
-
 # ¿Qué son los métodos del ciclo vida?
 
 Todos los componentes en React pasan por una serie de fases que generalmente se denominan “Ciclo de Vida del componente” es un proceso que React hace en cada componente, en algunos casos no podemos verlos como un bloque de código y en otros podemos llamarlos en nuestro componente para asignar una actividad según sea el caso necesario.
@@ -436,6 +410,32 @@ Ahora que entendemos cada una de las fases que tiene el ciclo de vida de react, 
 
 # Configurar un entorno de trabajo profesional
 
+## Instalación y configuración de entorno
+
+niciar un proyecto de Node.js
+
+    npm init -y
+
+Instalar React
+
+    npm install --save react react-dom
+
+## Agregando compatibilidad con todos los navegadores usando Babel
+
+Babel es una herramienta muy popular para escribir JavaScript moderno y transformarlo en código que pueda entender cualquier navegador.
+
+Instalación de Babel y otras herramientas para que funcione con React:
+
+    npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+
+Configuración de Babel (.babelrc):
+
+```json
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
 ## Webpack: Empaquetando nuestros módulos
 
 "Webpack es una herramienta que nos ayuda a transformar multiples archivos (JavaScript, HTML, CSS, imágenes) en uno solo (o a veces un poco más) que tendrá todo nuestro código listo para producción.
@@ -485,16 +485,6 @@ module.exports = {
 };
 ```
 
-Script para ejecutar las tareas de Webpack (package.json):
-
-```json
-{
-  "scripts": {
-    "build": "webpack --mode production"
-  }
-}
-```
-
 ## Webpack Dev Server: Reporte de errores y Cambios en tiempo real
 
 Instalación de Webpack Dev Server:
@@ -510,41 +500,6 @@ Script para ejecutar el servidor de Webpack y visualizar los cambios en tiempo r
     "dev": "webpack-dev-server --open --mode development"
   }
 }
-```
-
-## Estilos con SASS
-
-Los preprocesadores como Sass son herramientas que nos permiten escribir CSS con una sintaxis un poco diferente y más amigable que luego se transformará en CSS normal. Gracias a Sass podemos escribir CSS con variables, mixins, bucles, entre otras características.
-
-Instalación de Sass:
-
-    npm install --save-dev mini-css-extract-plugin css-loader node-sass sass-loader
-
-## Configuración de Sass en Webpack (webpack.config.js):
-
-```javascript
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// ...
-module: {
-  rules: [
-    {
-      test: /\.(s*)css$/,
-      use: [
-        { loader: MiniCssExtractPlugin.loader },
-        'css-loader',
-        'sass-loader',
-      ],
-    },
-  ],
-},
-
-// ...
-plugins: [
-  new MiniCssExtractPlugin({
-    filename: 'assets/[name].css',
-  }),
-],`
 ```
 
 ## Configuración final: ESLint y Git Ignore
@@ -781,17 +736,19 @@ Instalación de File Loader:
 
 Configuración de File Loader en Webpack (webpack.config.js):
 
-    rules: [
+```javascript
+rules: [
+  {
+    test: /\.(png|gif|jpg)$/,
+    use: [
       {
-        test: /\.(png|gif|jpg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'assets/[hash].[ext]' },
-          }
-        ],
-      },
+        loader: 'file-loader',
+        options: { name: 'assets/[hash].[ext]' },
+      }
     ],
+  },
+],
+```
 
 Uso de File Loader con React:
 
@@ -802,6 +759,41 @@ import nombreDeLaImagen from "../assets/static/nombre-del-archivo";
 const Component = () => <img src={nombreDeLaImagen} />;
 
 export default Component;
+```
+
+## Estilos con SASS
+
+Los preprocesadores como Sass son herramientas que nos permiten escribir CSS con una sintaxis un poco diferente y más amigable que luego se transformará en CSS normal. Gracias a Sass podemos escribir CSS con variables, mixins, bucles, entre otras características.
+
+Instalación de Sass:
+
+    npm install --save-dev mini-css-extract-plugin css-loader node-sass sass-loader
+
+## Configuración de Sass en Webpack (webpack.config.js):
+
+```javascript
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// ...
+module: {
+  rules: [
+    {
+      test: /\.(s*)css$/,
+      use: [
+        { loader: MiniCssExtractPlugin.loader },
+        'css-loader',
+        'sass-loader',
+      ],
+    },
+  ],
+},
+
+// ...
+plugins: [
+  new MiniCssExtractPlugin({
+    filename: 'assets/[name].css',
+  }),
+],`
 ```
 
 ## Imports, Variables y Fuentes de Google en Sass
