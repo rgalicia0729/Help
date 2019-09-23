@@ -944,3 +944,58 @@ Component.propTypes = {
   list: PropTypes.array // opcional
 };
 ```
+
+# React Router
+
+Utilizar React Router para poder navegar en un proyecto de React.
+
+## ¿Qué es React Router y cómo instalarlo?
+
+Vamos a instalar React Router, la librería que nos va a permitir manejar rutas dentro de nuestra aplicación:
+
+    npm install react-router-dom --save
+
+## Crear nuestro archivo de Rutas
+
+Dentro de nuestro proyecto vamos a crear una carpeta llamada routes donde vamos a ir añadiendo las rutas que necesitemos en la aplicación.
+
+Las rutas que añadamos debemos definirlas con el componente Route y estas deben estar encapsuladas dentro del componente BrowserRouter del paquete de react-router-dom. Para definir una ruta con el componente Route debemos pasarle las props de:
+
+- path para indicar la url.
+- exact si queremos que funcione única y exactamente con la url que le digamos.
+- component para indicarle el componente que va a renderizar.
+
+Debemos modificar nuestra configuración del entorno de desarrollo local para que pueda funcionar con el uso de rutas, debemos ir al archivo webpack.config.js y añadir este fragmento de código antes de plugins:
+
+```javascript
+module.exports = {
+  // Esta es la configuración
+  devServer: {
+    historyApiFallback: true
+  }
+};
+```
+
+Ejemplo de componente Route.
+
+```javascript
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
+    </Switch>
+  </BrowserRouter>
+);
+
+export default App;
+```
+
+Para asegurar que nuestras rutas solamente se rendericen con la que haga match con la url debemos encapsular las rutas dentro del componente.
