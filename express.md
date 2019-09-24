@@ -79,7 +79,7 @@ require("dotenv").config();
 
 const config = {
   dev: process.env.NODE_ENV !== "production",
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3000
 };
 
 module.exports = { config };
@@ -137,7 +137,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: movies,
-        message: "Peliculas encontradas exitosamente",
+        message: "Peliculas encontradas exitosamente"
       });
     } catch (error) {
       next(error);
@@ -153,7 +153,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: movie,
-        message: "Pelicula encontrada exitosamente",
+        message: "Pelicula encontrada exitosamente"
       });
     } catch (error) {
       next(error);
@@ -169,7 +169,7 @@ function moviesApi(app) {
 
       res.status(201).json({
         data: createMovieId,
-        message: "Pelicula creada exitosamente",
+        message: "Pelicula creada exitosamente"
       });
     } catch (error) {
       next(error);
@@ -185,7 +185,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: updateMovieId,
-        message: "Pelicula actualizada exitosamente",
+        message: "Pelicula actualizada exitosamente"
       });
     } catch (error) {
       next(error);
@@ -201,7 +201,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: deleteMovieId,
-        message: "Pelicula eliminada exitosamente",
+        message: "Pelicula eliminada exitosamente"
       });
     } catch (error) {
       next(error);
@@ -256,6 +256,22 @@ module.exports = MoviesServices;
 Para conectarse con MongoDB vamos a instalar la libreria de la siguiente manera:
 
     npm i -S mongodb
+
+## Conexión con PostgreSQL
+
+Lo primero que tenemos que hacer es definir las entidades de las bases de datos que vamos a utilizar. En nuestro proyecto vamos a usar PostgreSQL, una base de datos relacional.
+
+## Implementación de modelos con sequelize
+
+Sequelize es un modelo de programación de mapeo de objeto-relacional basado en promesas, para Node.js.
+
+Dos tipos de objetos: modelos nativos de sequelize y servicios.
+
+Singleton es un objeto que solo tiene una instancia. Cada vez que llamemos a una función no va a crear múltiples instancias.
+
+Para la conexion de PostgreSQL y Express, vamos a instalar las siguientes dependencias.
+
+    npm i -S sequelize pg pg-hstore
 
 # Autenticación con passport
 
