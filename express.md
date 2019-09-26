@@ -273,6 +273,14 @@ Para la conexion de PostgreSQL y Express, vamos a instalar las siguientes depend
 
     npm i -S sequelize pg pg-hstore
 
+## Creando una advertencia sobre el borrado de base de datos
+
+Después de haber creado el script, cada vez que lo ejecutamos vamos a borrar la base de datos. Como esto puede ser peligroso vamos a preguntarle al usuario si está seguro de esto. Vamos a crear un prompt que haga una confirmación de ejecución del script de inicialización.
+
+Cuando hay un error, como por ejemplo pasar mal la contraseña, no debería permitirnos avanzar con el script. Hay una parte de la configuración de PostgreSQL en la que por defecto tiene unos parámetros trust, que permiten autenticación sin password. Es importante que tengas en cuenta esto y hagas el ajuste.
+
+    npm i -S inquirer
+
 # Autenticación con passport
 
 ## Stack de seguridad moderno
@@ -358,3 +366,25 @@ if (option == "sign") {
   console.log('Option needs to be "sign" or "verify"');
 }
 ```
+
+Cuando se crea un usuario, el password es importante que no se almacene plano, los password deben de estar encriptados, para esto vamos hacer uso de una libreria llamada bcrypt.
+
+    npm i -S bcrypt
+
+Aqui un ejemplo de como utilizar la libreria bcrypt, esta recibe el password plano y mediante un numero de iteraciones nos crea un password encriptado, el segundo argumento define el numero de iteraciones.
+
+```javascript
+const hashedPassword = await bcrypt.hash(elPassword, 10);
+```
+
+## Configuración de Passport.js
+
+Passport.js es un middleware para express que nos permite implementar estrategias de autenticación de una manera rápida y simple.
+
+Vamos a instalar las dependencias necesarias para implementar una estrategia de autenticacion.
+
+    npm i -S jsonwebtoken passport passport-http passport-jwt
+
+Otra de las dependencias que vamos a utilizar es chalk, esta en modo de desarrollo. Esta nos permite pintar con colores en la terminal.
+
+    npm i -D chalk
