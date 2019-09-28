@@ -79,7 +79,7 @@ require("dotenv").config();
 
 const config = {
   dev: process.env.NODE_ENV !== "production",
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 3000,
 };
 
 module.exports = { config };
@@ -137,7 +137,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: movies,
-        message: "Peliculas encontradas exitosamente"
+        message: "Peliculas encontradas exitosamente",
       });
     } catch (error) {
       next(error);
@@ -153,7 +153,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: movie,
-        message: "Pelicula encontrada exitosamente"
+        message: "Pelicula encontrada exitosamente",
       });
     } catch (error) {
       next(error);
@@ -169,7 +169,7 @@ function moviesApi(app) {
 
       res.status(201).json({
         data: createMovieId,
-        message: "Pelicula creada exitosamente"
+        message: "Pelicula creada exitosamente",
       });
     } catch (error) {
       next(error);
@@ -185,7 +185,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: updateMovieId,
-        message: "Pelicula actualizada exitosamente"
+        message: "Pelicula actualizada exitosamente",
       });
     } catch (error) {
       next(error);
@@ -201,7 +201,7 @@ function moviesApi(app) {
 
       res.status(200).json({
         data: deleteMovieId,
-        message: "Pelicula eliminada exitosamente"
+        message: "Pelicula eliminada exitosamente",
       });
     } catch (error) {
       next(error);
@@ -400,8 +400,8 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    secret: "keyboard cat example"
-  })
+    secret: "keyboard cat example",
+  }),
 );
 
 app.get("/", function(req, res) {

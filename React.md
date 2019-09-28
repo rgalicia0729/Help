@@ -317,7 +317,7 @@ export default Button;
 import React from "react";
 import Button from "./components/Button";
 
-ReactDOM.render(<Button text="¡Hola!" />, document.getElementByid("root"));
+ReactDOM.render(<Button text='¡Hola!' />, document.getElementByid("root"));
 ```
 
 # ¿Qué son los métodos del ciclo vida?
@@ -446,10 +446,10 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -457,23 +457,23 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: {
-          loader: "html-loader"
-        }
-      }
-    ]
+          loader: "html-loader",
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: "./index.html"
-    })
-  ]
+      filename: "./index.html",
+    }),
+  ],
 };
 ```
 
@@ -920,7 +920,7 @@ Component.propTypes = {
   name: PropTypes.string,
   lastName: PropTypes.string,
   age: PropTypes.number,
-  list: PropTypes.array
+  list: PropTypes.array,
 };
 
 export default Component;
@@ -933,7 +933,7 @@ Component.propTypes = {
   name: PropTypes.string.isRequired, // obligatorio
   lastName: PropTypes.string.isRequired, // obligatorio
   age: PropTypes.number, // opcional,
-  list: PropTypes.array // opcional
+  list: PropTypes.array, // opcional
 };
 ```
 
@@ -963,8 +963,8 @@ Debemos modificar nuestra configuración del entorno de desarrollo local para qu
 module.exports = {
   // Esta es la configuración
   devServer: {
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+  },
 };
 ```
 
@@ -980,9 +980,9 @@ import Register from "../pages/Register";
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/register' component={Register} />
     </Switch>
   </BrowserRouter>
 );
@@ -1000,3 +1000,132 @@ Fragment nos permite no añadir elementos extra al DOM, podemos utilizar Fragmen
 
 - Añadiendo el componente o .
 - O implemente encapsulando nuestros elementos dentro de <>.
+
+# Qué es Redux
+
+Redux es una librería escrita en JavaScript, basada en la arquitectura Flux y creada por Dan Abramov, se basa en 3 principios fundamentales:
+
+- Solamente hay una fuente de la verdad.
+- El estado es de solo lectura.
+- Solamente podemos utilizar funciones puras.
+
+Nuestra UI va a activar una action, esta action va a ejecutar un reducer para modificar la información del store, y al actualizarse el store la UI se va a modificar.
+
+Redux nos permite tener un contenedor predecible del estado en aplicaciones creadas con JavaScript, Nos ayuda a escribir aplicaciones que se comportan de una manera consistente, Esto significa que podemos utilizar esta lógica en aplicaciones del lado del cliente, trabajar del lado del servidor o crear aplicaciones para dispositivos móviles.
+
+Uno de los principales uso que tiene Redux es con React pero puede ser implementado en cualquier librería o proyecto que este construido con JavaScript, lo cual incluye a Angular, Vue o algún otro framework o librería.
+
+Redux nace de la arquitectura Flux, tomando inspiración del lenguaje funcional Elm y es creado por Dan Abramov y Andrew Clark en el 2015, Hoy en día es una de las librerías más utilizadas para el manejo del flujo de la información en aplicaciones.
+
+Una de las principales motivaciones para crear Redux nace en resolver un problema y era el manejo del estado y el flujo de nuestras aplicaciones creadas en JavaScript. Redux propone una forma de manejar el estado donde podamos controlar cómo vamos a interactuar con otros elementos (llamadas a un API) o interacciones dentro de nuestra aplicación, teniendo en cuenta esto, Redux intenta de predecir las mutaciones que pueda sufrir el estado, creando restricciones de cuando y como pueden ser ejecutadas las actualizaciones en nuestras aplicaciones.
+
+Redux es una librería muy pequeña que se puede incorporar en cualquier proyecto construido en JavaScript y se basa en tres principios:
+
+## Única fuente de la verdad:
+
+Nuestra aplicación solo debe de tener un único Store y es la única fuente de información.
+
+## El estado es de solo lectura
+
+La única forma de modificar el estado es emitiendo un acción, este objeto describe lo que va a ocurrir.
+
+## Los cambios se realizan con funciones puras
+
+Para realizar cambios al estado es necesario utilizar Reducers los cuales son funciones puras que toman el estado anterior, una acción y devuelve un nuevo estado con las modificaciones necesarias.
+
+Teniendo en cuenta esta información continuaremos en el curso explicando cada uno de estos elementos que incorpora Redux en nuestra aplicación Platzi Video.
+
+## Instalación de Redux
+
+Vamos a instalar las dependencias para poder trabajar con Redux:
+
+    npm i -S redux react-redux
+
+Dentro de nuestro proyecto vamos a crear una carpeta para nuestros actions y otra para los reducers que utilizaremos en Redux, estas carpetas las vamos a crear dentro del directorio de src del proyecto.
+
+El paquete react-redux nos proporciona un Provider para poder encapsular nuestros componentes por medio de un connect para poder transmitir la información que necesitemos del store a cada componente.
+
+## Creando el Store de Redux
+
+Para crear un Store necesitamos llamar a la función createStore del paquete de redux pasándole los parámetros del reducer y initialState.
+
+Para conectar un componente a Redux vamos a necesitar importar connect de react-redux, connect va a aceptar dos parámetros:
+
+- mapStateToProps: es una función que le va a indicar al provider qué información necesitamos del store.
+- mapDispatchToProps: es un objeto con las distintas funciones para ejecutar una action en Redux.
+
+Ahora vamos a conectar nuestra aplicacion con redux de la siguiente manera.
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers";
+import App from "./routes/App";
+
+const initialState = {
+  mensaje: "Saludo desde redux",
+};
+
+const store = createStore(reducer, initialState);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root"),
+);
+```
+
+Ahora vamos a conectar un componente con redux
+
+```javascript
+import React from "react";
+import { connect } from "react-redux";
+
+const Login = ({ mensaje }) => <h3>{mensaje}</h3>;
+
+const mapStateToProps = state => {
+  return {
+    mensaje: state.mensaje,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Login);
+```
+
+En la carpeta de reducers, creamos un archivo index.js y agregamos nuestra primer funcion de reducer.
+
+```javascript
+const reducer = (state, action) => {
+  return state;
+};
+
+export default reducer;
+```
+
+# Server Side Render con Express
+
+## ¿Qué es Server Side Rendering?
+
+Cuando realizamos una petición a una página que hace Client Server Render primero el servidor le contesta al navegador con un documento HTML, después descarga el JS y en el caso de tecnologías como React el navegador ejecuta la lógica para finalmente hacer visible el sitio, ocasionando tiempos de carga más lentos en comparación al Server Side Render donde el navegador recibe un HTML con todo el contenido visible de la página para después descargar y ejecutar el JavaScript.
+
+## Babel, Express y React
+
+Para el desarrollo de este curso vamos a utilizar 3 herramientas esenciales:
+
+- Babel: transforma nuestro código a una versión de JavaScript que cualquier navegador pueda entender.
+
+- Express: es un framework de aplicaciones web en Node.js que nos va a ser útil para crear nuestro servidor.
+
+- React: librería de JavaScript para crear componentes y nos proporciona un método para renderizar nuestros componentes del lado del servidor.
+
+Renderizar del lado del servidor nos va a traer beneficios en:
+
+- Velocidad de primera carga.
+- Mejora el SEO.
+- Look & Feel más limpio.
