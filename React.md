@@ -1108,6 +1108,42 @@ const reducer = (state, action) => {
 export default reducer;
 ```
 
+## Creando los reducers
+
+Un action de Redux va a contener dos elementos:
+
+- type: para indicar la acción que se va a ejecutar.
+- payload: es la información que estamos mandando al reducer.
+
+Dentro de los reducers usaremos un switch para separar la lógica por cada tipo de acción que tendremos en Redux.
+
+## Creando un Servicio para Gravatar
+
+Muchas veces la mejor opción no es descargar un paquete de npm ya que podemos ver la documentación, entender cómo funciona y nosotros implementar el código necesario para nuestro caso, ya que instalar todo el paquete puede volver más pesado nuestro proyecto.
+
+Para nuestro servicio que llamará a Gravatar vamos a crear la carpeta utils y dentro añadir el archivo gravatar.js.
+
+## Debug con Redux Devtools
+
+Redux Dev Tools nos va a servir mucho para entender mejor el flujo de nuestra información en nuestra aplicación y poder realizar debugging de manera sencilla.
+
+Solamente necesitas instalar la extensión según el navegador que tengas:
+
+    Chrome
+    Firefox
+
+Una vez instalado dentro de nuestro index.js vamos a añadir el siguiente código:
+
+```javascript
+// importamos compose
+import { createStore, compose } from ‘redux’;
+...
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, initialState, composeEnhancers());
+```
+
 # Server Side Render con Express
 
 ## ¿Qué es Server Side Rendering?
