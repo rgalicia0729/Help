@@ -753,6 +753,27 @@ const Component = () => <img src={nombreDeLaImagen} />;
 export default Component;
 ```
 
+## Importar css con React
+
+Instalar las siguientes dependencias.
+
+    npm i -D css-loader style-loader
+
+Agregar la siguiente regla al archivo de configuracion de webpack
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+};
+```
+
 ## Estilos con SASS
 
 Los preprocesadores como Sass son herramientas que nos permiten escribir CSS con una sintaxis un poco diferente y más amigable que luego se transformará en CSS normal. Gracias a Sass podemos escribir CSS con variables, mixins, bucles, entre otras características.
