@@ -317,7 +317,7 @@ export default Button;
 import React from "react";
 import Button from "./components/Button";
 
-ReactDOM.render(<Button text='¡Hola!' />, document.getElementByid("root"));
+ReactDOM.render(<Button text="¡Hola!" />, document.getElementByid("root"));
 ```
 
 # ¿Qué son los métodos del ciclo vida?
@@ -446,10 +446,10 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "bundle.js"
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
@@ -457,23 +457,23 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-        },
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.html$/,
         use: {
-          loader: "html-loader",
-        },
-      },
-    ],
+          loader: "html-loader"
+        }
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: "./index.html",
-    }),
-  ],
+      filename: "./index.html"
+    })
+  ]
 };
 ```
 
@@ -767,10 +767,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
-  },
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
 };
 ```
 
@@ -941,7 +941,7 @@ Component.propTypes = {
   name: PropTypes.string,
   lastName: PropTypes.string,
   age: PropTypes.number,
-  list: PropTypes.array,
+  list: PropTypes.array
 };
 
 export default Component;
@@ -954,7 +954,7 @@ Component.propTypes = {
   name: PropTypes.string.isRequired, // obligatorio
   lastName: PropTypes.string.isRequired, // obligatorio
   age: PropTypes.number, // opcional,
-  list: PropTypes.array, // opcional
+  list: PropTypes.array // opcional
 };
 ```
 
@@ -984,8 +984,8 @@ Debemos modificar nuestra configuración del entorno de desarrollo local para qu
 module.exports = {
   // Esta es la configuración
   devServer: {
-    historyApiFallback: true,
-  },
+    historyApiFallback: true
+  }
 };
 ```
 
@@ -1001,9 +1001,9 @@ import Register from "../pages/Register";
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/register' component={Register} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
     </Switch>
   </BrowserRouter>
 );
@@ -1086,7 +1086,7 @@ import reducer from "./reducers";
 import App from "./routes/App";
 
 const initialState = {
-  mensaje: "Saludo desde redux",
+  mensaje: "Saludo desde redux"
 };
 
 const store = createStore(reducer, initialState);
@@ -1095,7 +1095,7 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );
 ```
 
@@ -1109,13 +1109,13 @@ const Login = ({ mensaje }) => <h3>{mensaje}</h3>;
 
 const mapStateToProps = state => {
   return {
-    mensaje: state.mensaje,
+    mensaje: state.mensaje
   };
 };
 
 export default connect(
   mapStateToProps,
-  null,
+  null
 )(Login);
 ```
 
@@ -1194,6 +1194,61 @@ Dentro de las dependencias que vamos a instalar se encuentran:
     npm i -D @babel/register nodemon
 
     npm i -S express dotenv
+
+Creamos la estructura de directorios necesarios para hacer server render. Dentro de src creamos dos directorios uno llamado server y otro frontend. Dentro de frontend como su nombre lo indica debemos almacenar todo lo correspondiente al frontend de la aplicacion.
+
+En el directorio de server creamos un archivo llamado index.js y dentro agregamos lo siguiente.
+
+```javascript
+require("@babel/register")({
+  ignore: [/(node_modules)/],
+  presets: ["@babel/preset-env", "@babel/preset-react"]
+});
+
+require("./server.js");
+```
+
+En el directorio server creamos un archivo llamado server.js y agregamos el siguiente codigo para iniciar el servidor de express.
+
+```javascript
+import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const { ENV } = process.env;
+const PORT = process.env.PORT || 8080;
+
+const app = express();
+
+app.use("*", (req, res) => {
+  res.status(200).json({
+    saludo: "Hola Mundo !!"
+  });
+});
+
+app.listen(PORT, error => {
+  if (error) {
+    console.log(error);
+  }
+  console.log(`Listen http://localhost:${PORT}`);
+});
+```
+
+En la raiz del proyecto creamos un archivo para agregar las variables de entorno, este archivo se debe de llamar .env
+
+```env
+PORT=3000
+NODE_ENV=development
+```
+
+Ahora en el package.json vamos agregar el siguiente script para ejecutar el servidor utiliando nodemon.
+
+```json
+{
+  "start.dev": "nodemon src/server/index.js"
+}
+```
 
 ## Configuración de ESLint con Webpack
 
