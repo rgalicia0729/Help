@@ -1165,3 +1165,55 @@ Renderizar del lado del servidor nos va a traer beneficios en:
 - Velocidad de primera carga.
 - Mejora el SEO.
 - Look & Feel más limpio.
+
+## Creación del proyecto base
+
+Dentro de las dependencias que vamos a instalar se encuentran:
+
+    npm i -D @babel/register nodemon
+
+    npm i -S express dotenv
+
+## Configuración de ESLint con Webpack
+
+ESLint es una herramienta que nos señala el código que no cumpla con los estándares que le indiquemos. Se configura desde un .eslintrc. Debemos instalar las siguientes dependencias:
+
+    npm i -D babel-eslint eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-loader eslint-plugin-import eslint-plugin-react
+
+Dentro del archivo .eslintrc podemos indicarle a ESLint el nivel de alerta sobre una regla:
+
+    2: error
+    1: warning
+    0: omite la regla
+
+En la configuración de webpack, agregamos la siguiente regla
+
+```javascript
+rules[{
+  test: /\.(js|jsx)$/,
+  exclude: /node_modules/,
+  enforce: 'pre',
+  use: {
+    loader: 'eslint-loader',
+  },
+},]
+```
+
+## Preparación de Webpack, Babel, PostCSS y Assets
+
+En el archivo .babelrc agregar la siguiente configuracion.
+
+```json
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-class-properties",
+        "react-hot-loader/babel",
+        "babel-plugintransform-object-assign"
+      ]
+    }
+  }
+}
+```
