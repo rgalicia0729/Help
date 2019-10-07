@@ -317,7 +317,7 @@ export default Button;
 import React from "react";
 import Button from "./components/Button";
 
-ReactDOM.render(<Button text="¡Hola!" />, document.getElementByid("root"));
+ReactDOM.render(<Button text='¡Hola!' />, document.getElementByid("root"));
 ```
 
 # ¿Qué son los métodos del ciclo vida?
@@ -446,10 +446,10 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -457,23 +457,23 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: {
-          loader: "html-loader"
-        }
-      }
-    ]
+          loader: "html-loader",
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: "./index.html"
-    })
-  ]
+      filename: "./index.html",
+    }),
+  ],
 };
 ```
 
@@ -767,10 +767,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
 ```
 
@@ -941,7 +941,7 @@ Component.propTypes = {
   name: PropTypes.string,
   lastName: PropTypes.string,
   age: PropTypes.number,
-  list: PropTypes.array
+  list: PropTypes.array,
 };
 
 export default Component;
@@ -954,7 +954,7 @@ Component.propTypes = {
   name: PropTypes.string.isRequired, // obligatorio
   lastName: PropTypes.string.isRequired, // obligatorio
   age: PropTypes.number, // opcional,
-  list: PropTypes.array // opcional
+  list: PropTypes.array, // opcional
 };
 ```
 
@@ -984,8 +984,8 @@ Debemos modificar nuestra configuración del entorno de desarrollo local para qu
 module.exports = {
   // Esta es la configuración
   devServer: {
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+  },
 };
 ```
 
@@ -1001,9 +1001,9 @@ import Register from "../pages/Register";
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/register' component={Register} />
     </Switch>
   </BrowserRouter>
 );
@@ -1086,7 +1086,7 @@ import reducer from "./reducers";
 import App from "./routes/App";
 
 const initialState = {
-  mensaje: "Saludo desde redux"
+  mensaje: "Saludo desde redux",
 };
 
 const store = createStore(reducer, initialState);
@@ -1095,7 +1095,7 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 ```
 
@@ -1109,13 +1109,13 @@ const Login = ({ mensaje }) => <h3>{mensaje}</h3>;
 
 const mapStateToProps = state => {
   return {
-    mensaje: state.mensaje
+    mensaje: state.mensaje,
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  null,
 )(Login);
 ```
 
@@ -1202,7 +1202,7 @@ En el directorio de server creamos un archivo llamado index.js y dentro agregamo
 ```javascript
 require("@babel/register")({
   ignore: [/(node_modules)/],
-  presets: ["@babel/preset-env", "@babel/preset-react"]
+  presets: ["@babel/preset-env", "@babel/preset-react"],
 });
 
 require("./server.js");
@@ -1223,7 +1223,7 @@ const app = express();
 
 app.use("*", (req, res) => {
   res.status(200).json({
-    saludo: "Hola Mundo !!"
+    saludo: "Hola Mundo !!",
   });
 });
 
@@ -1275,21 +1275,138 @@ rules[{
 },]
 ```
 
-## Preparación de Webpack, Babel, PostCSS y Assets
+## Usando Plugins y vendor file en Webpack
 
-En el archivo .babelrc agregar la siguiente configuracion.
+Ahora webpack deveria tener la siguiente configuracion
 
-```json
-{
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "env": {
-    "development": {
-      "plugins": [
-        "transform-class-properties",
-        "react-hot-loader/babel",
-        "babel-plugintransform-object-assign"
-      ]
-    }
-  }
+```javascript
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/frontend/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    publicPath: "/",
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "async",
+      name: true,
+      cacheGroups: {
+        vendors: {
+          name: "vendors",
+          chunks: "all",
+          reuseExistingChunk: true,
+          priority: 1,
+          filename: "assets/vendor.js",
+          enforce: true,
+          test(module, chunks) {
+            const name = module.nameForCondition && module.nameForCondition();
+            return chunks.some(
+              chunks =>
+                chunks.name !== "vendor" && /[\\/]node_modules[\\/]/.test(name),
+            );
+          },
+        },
+      },
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        enforce: "pre",
+        use: {
+          loader: "eslint-loader",
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: "html-loader",
+        },
+      },
+      {
+        test: /\.(png|gif|jpg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: { name: "assets/[hash].[ext]" },
+          },
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      filename: "./index.html",
+    }),
+  ],
+};
+```
+
+Ahora server.js debe tener la siguiente configuracion.
+
+```javascript
+import express from "express";
+import dotenv from "dotenv";
+import webpack from "webpack";
+
+dotenv.config();
+
+const { ENV } = process.env;
+const PORT = process.env.PORT || 8080;
+
+const app = express();
+
+if (ENV === "development") {
+  const webpackConfig = require("../../webpack.config");
+  const webpackDevMiddleware = require("webpack-dev-middleware");
+  // const webpackHotMiddleware = require('webpack-hot-middleware');
+  const compiler = webpack(webpackConfig);
+  const serverConfig = {
+    contentBase: `http://localhost:${PORT}`,
+    port: PORT,
+    publicPath: webpackConfig.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    stats: { colors: true },
+  };
+  app.use(webpackDevMiddleware(compiler, serverConfig));
+  // app.use(webpackHotMiddleware(compiler));
 }
+
+app.use("*", (req, res) => {
+  res.status(200).json({
+    saludo: "Hola Mundo !!",
+  });
+});
+
+app.listen(PORT, error => {
+  if (error) {
+    console.log(error);
+  }
+  console.log(`Listen http://localhost:${PORT}`);
+});
 ```
