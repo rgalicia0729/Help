@@ -317,7 +317,7 @@ export default Button;
 import React from "react";
 import Button from "./components/Button";
 
-ReactDOM.render(<Button text='¡Hola!' />, document.getElementByid("root"));
+ReactDOM.render(<Button text="¡Hola!" />, document.getElementByid("root"));
 ```
 
 # ¿Qué son los métodos del ciclo vida?
@@ -412,89 +412,7 @@ Instalar React
 
     npm install --save react react-dom
 
-## Agregando compatibilidad con todos los navegadores usando Babel
-
-Babel es una herramienta muy popular para escribir JavaScript moderno y transformarlo en código que pueda entender cualquier navegador.
-
-Instalación de Babel y otras herramientas para que funcione con React:
-
-    npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
-
-Configuración de Babel (.babelrc):
-
-```json
-{
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
-}
-```
-
-## Webpack: Empaquetando nuestros módulos
-
-"Webpack es una herramienta que nos ayuda a transformar multiples archivos (JavaScript, HTML, CSS, imágenes) en uno solo (o a veces un poco más) que tendrá todo nuestro código listo para producción.
-
-Instalación de Webpack y algunos plugins:
-
-    npm install webpack webpack-cli html-webpack-plugin html-loader  --save-dev
-
-Configuración de Webpack (webpack.config.js):
-
-```javascript
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-module.exports = {
-  entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-  },
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-      {
-        test: /\.html$/,
-        use: {
-          loader: "html-loader",
-        },
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      filename: "./index.html",
-    }),
-  ],
-};
-```
-
-## Webpack Dev Server: Reporte de errores y Cambios en tiempo real
-
-Instalación de Webpack Dev Server:
-
-    npm install --save-dev webpack-dev-server
-
-Script para ejecutar el servidor de Webpack y visualizar los cambios en tiempo real (package.json):
-
-```json
-{
-  "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack-dev-server --open --mode development"
-  }
-}
-```
-
-## Configuración final: ESLint y Git Ignore
+## ESLint y Git Ignore
 
 El Git Ignore es un archivo que nos permite definir qué archivos NO queremos publicar en nuestros repositorios. Solo debemos crear el archivo .gitignore y escribir los nombres de los archivos y/o carpetas que no queremos publicar.
 
@@ -716,6 +634,88 @@ Podemos configurar las reglas de ESLint en el archivo .eslintrc.
 }
 ```
 
+## Agregando compatibilidad con todos los navegadores usando Babel
+
+Babel es una herramienta muy popular para escribir JavaScript moderno y transformarlo en código que pueda entender cualquier navegador.
+
+Instalación de Babel y otras herramientas para que funcione con React:
+
+    npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+
+Configuración de Babel (.babelrc):
+
+```json
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+## Webpack: Empaquetando nuestros módulos
+
+"Webpack es una herramienta que nos ayuda a transformar multiples archivos (JavaScript, HTML, CSS, imágenes) en uno solo (o a veces un poco más) que tendrá todo nuestro código listo para producción.
+
+Instalación de Webpack y algunos plugins:
+
+    npm install webpack webpack-cli html-webpack-plugin html-loader  --save-dev
+
+Configuración de Webpack (webpack.config.js):
+
+```javascript
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+  },
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: "html-loader"
+        }
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
+```
+
+## Webpack Dev Server: Reporte de errores y Cambios en tiempo real
+
+Instalación de Webpack Dev Server:
+
+    npm install --save-dev webpack-dev-server
+
+Script para ejecutar el servidor de Webpack y visualizar los cambios en tiempo real (package.json):
+
+```json
+{
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open --mode development"
+  }
+}
+```
+
 ## Añadiendo imágenes con Webpack
 
 Vamos a usar File Loader para acceder a las imágenes de nuestro proyecto desde el código.
@@ -767,10 +767,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
-  },
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
 };
 ```
 
@@ -941,7 +941,7 @@ Component.propTypes = {
   name: PropTypes.string,
   lastName: PropTypes.string,
   age: PropTypes.number,
-  list: PropTypes.array,
+  list: PropTypes.array
 };
 
 export default Component;
@@ -954,7 +954,7 @@ Component.propTypes = {
   name: PropTypes.string.isRequired, // obligatorio
   lastName: PropTypes.string.isRequired, // obligatorio
   age: PropTypes.number, // opcional,
-  list: PropTypes.array, // opcional
+  list: PropTypes.array // opcional
 };
 ```
 
@@ -984,8 +984,8 @@ Debemos modificar nuestra configuración del entorno de desarrollo local para qu
 module.exports = {
   // Esta es la configuración
   devServer: {
-    historyApiFallback: true,
-  },
+    historyApiFallback: true
+  }
 };
 ```
 
@@ -1001,9 +1001,9 @@ import Register from "../pages/Register";
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/register' component={Register} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
     </Switch>
   </BrowserRouter>
 );
@@ -1086,7 +1086,7 @@ import reducer from "./reducers";
 import App from "./routes/App";
 
 const initialState = {
-  mensaje: "Saludo desde redux",
+  mensaje: "Saludo desde redux"
 };
 
 const store = createStore(reducer, initialState);
@@ -1095,7 +1095,7 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );
 ```
 
@@ -1109,13 +1109,13 @@ const Login = ({ mensaje }) => <h3>{mensaje}</h3>;
 
 const mapStateToProps = state => {
   return {
-    mensaje: state.mensaje,
+    mensaje: state.mensaje
   };
 };
 
 export default connect(
   mapStateToProps,
-  null,
+  null
 )(Login);
 ```
 
@@ -1197,15 +1197,15 @@ Dentro de las dependencias que vamos a instalar se encuentran:
 
 Creamos la estructura de directorios necesarios para hacer server render. Dentro de src creamos dos directorios uno llamado server y otro frontend. Dentro de frontend como su nombre lo indica debemos almacenar todo lo correspondiente al frontend de la aplicacion.
 
-En el directorio de server creamos un archivo llamado index.js y dentro agregamos lo siguiente.
+En el directorio de server creamos un archivo llamado index.js y dentro agregamos lo siguiente, esto para configurar nuestro babel register.
 
 ```javascript
 require("@babel/register")({
   ignore: [/(node_modules)/],
-  presets: ["@babel/preset-env", "@babel/preset-react"],
+  presets: ["@babel/preset-env", "@babel/preset-react"]
 });
 
-require("./server.js");
+require("./server");
 ```
 
 En el directorio server creamos un archivo llamado server.js y agregamos el siguiente codigo para iniciar el servidor de express.
@@ -1216,14 +1216,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const { ENV } = process.env;
-const PORT = process.env.PORT || 8080;
+const ENV = process.env.NODE_ENV;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-app.use("*", (req, res) => {
+app.get("*", (req, res) => {
   res.status(200).json({
-    saludo: "Hola Mundo !!",
+    saludo: "Hola Mundo"
   });
 });
 
@@ -1231,7 +1231,7 @@ app.listen(PORT, error => {
   if (error) {
     console.log(error);
   }
-  console.log(`Listen http://localhost:${PORT}`);
+  console.log(`Listen: http://localhost:${PORT}`);
 });
 ```
 
@@ -1275,24 +1275,56 @@ rules[{
 },]
 ```
 
-## Usando Plugins y vendor file en Webpack
+## Preparación de Webpack, Babel, PostCSS y Assets
 
-Ahora webpack deveria tener la siguiente configuracion
+Agregamos las siguientes dependencias:
+
+    npm i -D autoprefixer
+
+    npm i -D postcss-loader
+
+Cambiamos la configuracion del css por:
 
 ```javascript
-const webpack = require("webpack");
+rules: [
+  {
+    test: /\.css$/i,
+    use: ["style-loader", "css-loader", "postcss-loader"]
+  }
+];
+```
 
+Ahora agregamos un nuevo plugin a la configuracion de webpack.
+
+```javascript
+plugins: [
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      postcss: [autoprefixer()]
+    }
+  })
+];
+```
+
+En la raiz del proyecto crear un archivo llamado postcss.config.js y agregar el siguiente codigo.
+
+```javascript
 module.exports = {
-  entry: "./src/frontend/index.js",
-  mode: "development",
-  output: {
-    path: "/",
-    filename: "assets/app.js",
-    publicPath: "/",
-  },
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
+  plugins: {
+    autoprefixer: {}
+  }
+};
+```
+
+## Usando Plugins y vendor file en Webpack
+
+Los vendor files es un herramienta de optimización para que nuestro proyecto tenga una configuración mucho mas eficiente al momento de mandar a producción.
+
+Esta es la configuracion de los vendor file, en la configuracion de webpack.
+
+```javascript
+module.exports = {
+  /* --- */
   optimization: {
     splitChunks: {
       chunks: "async",
@@ -1308,70 +1340,39 @@ module.exports = {
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
-              chunks =>
-                chunks.name !== "vendor" && /[\\/]node_modules[\\/]/.test(name),
+              chunk =>
+                chunk.name !== "vendor" && /[\\/]node_modules[\\/]/.test(name)
             );
-          },
-        },
-      },
-    },
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        enforce: "pre",
-        use: {
-          loader: "eslint-loader",
-        },
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-      {
-        test: /\.html$/,
-        use: {
-          loader: "html-loader",
-        },
-      },
-      {
-        test: /\.(png|gif|jpg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: { name: "assets/[hash].[ext]" },
-          },
-        ],
-      },
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
-  },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+          }
+        }
+      }
+    }
+  }
+  /*---*/
 };
 ```
 
-Ahora server.js debe tener la siguiente configuracion.
+Tambien agregamos el siguiente plugin
 
 ```javascript
-import express from "express";
-import dotenv from "dotenv";
-import webpack from "webpack";
+module.exports = {
+  plugins: [new webpack.HotModuleReplacementPlugin()]
+};
+```
 
-dotenv.config();
+## Integración de Webpack con Express
 
-const { ENV } = process.env;
-const PORT = process.env.PORT || 8080;
+Agregar en la configuracion de webpack el mode, para indicar que estamos en desarrollo, esto por lo general se hace despues del entry point.
 
-const app = express();
+    mode: 'development',
 
+Agregar el public path dentro de la configuracion del output de webpack.
+
+    publicPath: '/',
+
+En el archivo server.js realizar la integracion de webpack con express de la siguiente manera.
+
+```javascript
 if (ENV === "development") {
   const webpackConfig = require("../../webpack.config");
   const webpackDevMiddleware = require("webpack-dev-middleware");
@@ -1383,22 +1384,92 @@ if (ENV === "development") {
     publicPath: webpackConfig.output.publicPath,
     hot: true,
     historyApiFallback: true,
-    stats: { colors: true },
+    stats: { colors: true }
   };
   app.use(webpackDevMiddleware(compiler, serverConfig));
   // app.use(webpackHotMiddleware(compiler));
 }
+```
 
-app.use("*", (req, res) => {
-  res.status(200).json({
-    saludo: "Hola Mundo !!",
-  });
-});
+Ahora vamos a realizar algunas modificaciones al archivo de configuracion de webpack.
 
-app.listen(PORT, error => {
-  if (error) {
-    console.log(error);
-  }
-  console.log(`Listen http://localhost:${PORT}`);
+- Eliminamos la integracion de HtmlWebpackPlugin, tanto el plugin como el require.
+- Cambiamos el valor del path de output por '/'
+- Cambiamos el valor de filename por 'assets/app.js'
+
+En el server.js agrego la configuración.
+
+```javascript
+app.get("*", (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Server Render</title>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script src="assets/app.js" type="text/javascript"></script>
+        <script src="assets/vendor.js" type="text/javascript"></script>
+      </body>
+    </html>
+  `);
 });
 ```
+
+## Aplicando history y creando rutas para el servidor
+
+Vamos a instalar la dependencia history para poder crear un historial del navegador desde el servidor:
+
+    npm i -S history react-router
+
+Para crear el historial debemos importar el método createBrowserHistory de history.
+
+Ejemplo de como quedaria el archivo index.js
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router } from "react-router";
+import { createBrowserHistory } from "history";
+import App from "./route/App";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const history = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={history}>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+Luego devemos definir las rutas del lado del servidor, agregando un archivo a la carpeta de route con el nombre de serverRoutes.js con la siguiente configuracion:
+
+```javascript
+import Home from "../components/Home";
+
+const serverRoutes = [
+  {
+    path: "/home",
+    component: Home,
+    exact: true
+  }
+];
+
+export default serverRoutes;
+```
+
+## Definiendo la función main para renderizado desde el servidor
+
+De momento ya nuestra aplicación es servida por Node.js a través de Express, llegó el momento de empezar a renderizar nuestro sitio del lado del servidor.
+
+Los dos elementos clave para esto son:
+
+- El método renderToString de react-dom/server que tal como dice su nombre, va a convertir un componente de React a String puro, lo va a renderizar.
+- El StaticRouter de react-router con el cual podemos crear un enrutador que no cambie de location.
