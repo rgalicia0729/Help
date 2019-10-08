@@ -1246,7 +1246,7 @@ Ahora en el package.json vamos agregar el siguiente script para ejecutar el serv
 
 ```json
 {
-  "start.dev": "nodemon src/server/index.js"
+  "start:dev": "nodemon src/server/index.js"
 }
 ```
 
@@ -1280,16 +1280,14 @@ rules[{
 Ahora webpack deveria tener la siguiente configuracion
 
 ```javascript
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "development",
   entry: "./src/frontend/index.js",
+  mode: "development",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: "/",
+    filename: "assets/app.js",
     publicPath: "/",
   },
   resolve: {
@@ -1356,13 +1354,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      filename: "./index.html",
-    }),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
 ```
 
