@@ -1473,3 +1473,9 @@ Los dos elementos clave para esto son:
 
 - El método renderToString de react-dom/server que tal como dice su nombre, va a convertir un componente de React a String puro, lo va a renderizar.
 - El StaticRouter de react-router con el cual podemos crear un enrutador que no cambie de location.
+
+## Assets require hook
+
+Nuestro sitio actualmente presenta un problema con la carga de imágenes si le desactivas el JavaScript, para resolver esto vamos a instalar asset-require-hook lo que nos va a permitir indicarle al servidor donde se encuentran los assets de nuestra aplicación.
+
+    npm i -S asset-require-hook
