@@ -92,7 +92,7 @@ Tiene sus perifericos (pantalla, teclado, mouse) integrados de forma que solo ll
 
 ### 1.2 Desktop o Computador de escritorio
 
-El computador que generalmente encontramos en las oficinas, se caracteriza por se mas grande que un computador portatil y los periféricos no están integrados en el computador, requiere conexión a la energía 100% del tiempo para que pueda funcionar.
+El computador que generalmente encontramos en las oficinas, se caracteriza por ser mas grande que un computador portatil y los periféricos no están integrados en el computador, requiere conexión a la energía 100% del tiempo para que pueda funcionar.
 
 Los computadores de escritorio son mas fáciles de modificar físicamente dandonos la opción de agregar o cambiar partes para hacerlo mas potente.
 
@@ -102,7 +102,7 @@ La CPU o Unidad Central de Procesamiento algunas veces escuchamos que le llaman 
 
 Es un circuito integrado que interpreta las instrucciones que ingresamos a través de los periféricos, las procesa y retorna la respuesta.
 
-Los computadores actuales tienen mas de una CPU integrada en un mismo chip lo correcto es llamas a cada una de las unidades CPU y al chip completo el procesador, pero en terminos generales es lo mismo.
+Los computadores actuales tienen mas de una CPU integrada en un mismo chip lo correcto es llamar a cada una de las unidades CPU y al chip completo el procesador, pero en terminos generales es lo mismo.
 
 ### Memoria RAM
 
@@ -153,9 +153,10 @@ Los archivos que se envían a través del protocolo HTTPS viajan por la red cifr
 
 Los navegadores te muestran cuando los sitios están usando este protocolo para envíar la información.
 
-Es seguro
-Información o No es seguro
-No es seguro o Peligroso
+- Es seguro
+- Información o No es seguro
+- No es seguro o Peligroso
+
 Para que un sitio web sea calificado como seguro, es decir que tenga el candadito al lado debe tener un certificado que lo garantice, no todos los casos en los que se muestra el candado implican que es completamente seguro ya que hay atacantes que crean sitios web falsos a los que les ponen certificados, sin embargo google solo autoriza certificado, valga la redundancia, de sitios certificados.
 
 ### Certificado SSL
@@ -163,3 +164,41 @@ Para que un sitio web sea calificado como seguro, es decir que tenga el candadit
 Arriba estuvimos hablando de los sitios web que utilizan el protocolo HTTP y HTTPS y mencionamos que aquellos que usan HTTPS tienen un certificado que los avala como sitios seguros y que nos dan tranquilidad sobre la forma en que los datos son enviados por la red.
 
 El certificado que se usa para este proceso se llama SSL que son las siglas para Secure Socket Layer, este es el protocolo que agrega la capa de seguridad y permite el cifrado de los datos.
+
+## Ingeniería social, Phishing y Publicidad engañosa
+
+La Ingeniería Social consiste en usar nuestras características humanas (hablar, no estar atento, confiar, conversar) para conseguir información a la que no deberíamos dar acceso.
+
+La Publicidad Engañosa son todos esos anuncios que nos prometen algún premio por, supuestamente, ser el usuario número x.
+
+El Phishing consiste en enviar diferentes mensajes haciéndose pasar por una entidad importante (Google, Facebook, bancos, policia de tránsito) o una persona necesitada para pedirte información personal para solucionar un problema que, en realidad, no es real.
+
+Ten mucho cuidado con los emails que recibes de personas o organizaciones que no conoces. Verifica que los logos y enlaces no sean una copia de los originales. No le hagas caso a los “reyes de Nigeria o Afganistán” que te piden que los ayudes a guardar una cantidad enorme de dinero a tu dirección porque los están persiguiendo o algo así, ni siquiera si los correos incluyen fotos a sus documentos de identidad.
+
+## Ataques DoS y DDoS, Man in the Middle y Ransomware
+
+Los siguientes tipos de ataques se aprovechan de vulnerabilidades técnicas en los servicios que almacenan la información, no tanto de los errores humanos.
+
+Ataques DoS y DDoS: los atacantes usan diferentes clientes/dispositivos sincronizados para hacer muchísimas peticiones a un solo servidor, haciendo que este no pueda responder más y deje de funcionar.
+
+Man In the Middle: cuando nos conectamos a redes públicas, así como cafeterías o aeropuertos, corremos el riesgo de que haya atacantes que se posicionan (virtualmente) entre los servidores que accedemos y nosotros, de forma que pueden interceptar la información que mandamos por la red: mensajes, contraseñas, entre otras.
+
+Ransomware: es software que accede a nuestros dispositivos para cifrar la información y pedirnos un pago a cambio de obtenerla de vuelta. Podemos prepararnos para este tipo de ataques guardando copias de seguridad de nuestra información, de esta forma no debemos pagar por el rescate y podremos restaurar casi toda nuestra información.
+
+## Virus y Malware, Troyanos, Adware y Spyware
+
+Virus y Malware: se descargan en nuestra computadora (en memorias USB infectadas, por ejemplo) y necesitan un archivo al cual pegarse para poder atacar, crecer y distribuirse por nuestro sistema.
+
+Troyanos: son piezas de software ocultas en código que a simple vista podemos considerar legítimo.
+
+Adware: publicidad engañosa que parece en diferentes ventanas de nuestro navegador pidiéndonos que demos click para, supuestamente, ganar un premio porque “somos especiales”.
+
+Spyware: entran a nuestros dispositivos sin dejar ningún rastro cuando encuentran alguna vulnerabilidad en nuestros sistemas operativos. Pueden espiar nuestras conversaciones y tomar control de la cámara y/o micrófono.
+
+No te preocupes. Hay formas de protegernos.
+
+Los Firewalls nos ayudan a detectar cuando un virus intenta entrar a nuestra computadora. Más adelante los estudiaremos a fondo.
+
+Los antivirus nos ayudan a protegernos de la mayoría de estos virus y detectar si teníamos alguno instalado. Pero no basta con hacer una sola revisión, debemos verificar constantemente si estamos infectados. Recuerda mantener la base de datos del antivirus actualizada.
+
+Actualiza tu navegador y sistema operativo. También es buena idea tapar la cámara/micrófono cuando no las estamos usando.
