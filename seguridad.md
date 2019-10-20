@@ -202,3 +202,110 @@ Los Firewalls nos ayudan a detectar cuando un virus intenta entrar a nuestra com
 Los antivirus nos ayudan a protegernos de la mayoría de estos virus y detectar si teníamos alguno instalado. Pero no basta con hacer una sola revisión, debemos verificar constantemente si estamos infectados. Recuerda mantener la base de datos del antivirus actualizada.
 
 Actualiza tu navegador y sistema operativo. También es buena idea tapar la cámara/micrófono cuando no las estamos usando.
+
+## Diseña contraseñas seguras
+
+Cómo crear contraseñas Seguras:
+
+- Elige una frase que puedes recordar fácilmente.
+- Toma la primera letra de cada palabra y coloca una letra mayúscula y otra minúscula.
+- Cuenta la cantidad de palabras de la frase y súmale los días de tu fecha de nacimiento.
+- Convierte dos letras en símbolos.
+- Usa generadores de contraseñas.
+- Revisa qué tan seguras son tus contraseñas.
+
+Cómo crear contraseñas Inseguras:
+
+- NO uses la misma contraseña en todas tus aplicaciones.
+- Usa por lo menos 8 caracteres que incluyan letras en mayúscula y minúscula, símbolos y números combinados.
+- No uses palabras demasiado obvias (nombres, apellidos, números de documento o teléfono, placa del carro, fechas especiales, etc).
+- No las guardes en lugares visible o fácilmente detectables como post its, blocks de notas, archivos o imágenes del computador, tableros, etc. Tampoco se las digas a nadie.
+- No uses palabras elegidas con el diccionario, ya que está técnica también la utilizan algunos atacantes para intentar descifrarlas.
+- No uses palabras o patrones comunes.
+
+# Prevención de Pérdida de Datos
+
+## ¿Qué es Seguridad de la Información y por qué hablamos de prevención de pérdida de datos?
+
+Te damos la bienvenida al Curso de DLP: Prevención de Pérdida de Datos.
+
+Tiene como objetivo acercar y sensibilizar a emprendedores digitales técnicas y mecanismos de prevención de pérdida de datos que puedan implementar en sus negocios para potenciarlos, mejorar su experiencia de usuario y gestionar aquellos riesgos de seguridad que potencialmente pueden afectarlos.
+
+Seguridad de la información: Es un valor estratégico, un generador de confianza. Son una serie de principios, guías y pasos que te permitirán custodiar la información y datos que tienes en tu empresa o negocio.
+
+No es solo infraestructura, va más alla de los sistemas de información, no es solo contratar un software antivirus o un firewall. Es un proceso iterativo y resiliente. No solo se busca preservar la información sino también potenciar tu negocio.
+
+La seguridad de la información busca garantizar tres atributos:
+
+    Confidencialidad: La información debe ser accesible solo a aquellas personas autorizadas
+    Integridad: La información debe ser completa, exacta e inalterada
+    Disponibilidad: La información debe poder ser consultada, localizada o recuperada cuando se le requiera
+
+¿Por qué hablamos de prevención de pérdida de datos?
+
+Porque estas técnicas nos garantiza los tres atributos señalados anteriormente, debemos establecer e incorporar medidas de técnicas y tecnológicas de protección que eviten la pérdida o filtración de nuestra información y garanticen la continuidad de nuestro negocio.
+
+## Estudios de Casos: Riesgos materializados que han afectado a grandes empresas
+
+Lecciones:
+
+- Ningún sistema es 100% seguro
+- La seguridad de la Información debe tratarse con un enfoque estratégico, transversal y preventivo
+- Es necesario siempre considerar el contexto y los comportamientos humanos
+- El liderazgo y la generación de competencias es fundamental para hacer una adecuada gestión de riesgos
+
+## Iniciación: Planeación y Compromiso Interno para adelantar un proceso de Gestión de Riesgos de Seguridad
+
+La planeación y el compromiso interno es algo fundamental a la hora de nuestro proceso de gestión de riesgos de seguridad. Luego de eso pasaremos a identificar cuáles son los activos de información, los datos que estas administrando y cómo fluyen dentro de la información.
+
+Después pasamos a identificar los riesgos, amenazas o vulnerabilidades. Qué deberías hacer cuando se presenta una eventualidad. Después identificamos qué controles o medidas puedes usar para garantizar la no pérdida de la información.
+
+Por último vas a tener que monitorear y evaluar esos controles. De nada sirve tener copias de seguridad sin poder restaurarlas correctamente y el riesgo de pérdida de información será muy menor.
+
+Planeación e Iniciación
+
+- Análisis de contexto
+- Identificación de Actores Internos y Externos
+- Compromiso de la Alta Dirección
+
+https://www.iso.org/obp/ui#iso:std:iso:31000:ed-2:v1:es
+
+## ¿Qué son los activos de Información? Cuál es su valor y cómo identificar los controles a implementar de acuerdo a su nivel de criticidad
+
+Los activos de información son todos los recursos que apoyan el modelo de negocios: bases de datos, archivos, manuales, aplicaciones, hardware y software que se tiene en una organización para desarrollar su objetivo.
+
+¿Cómo identificar Activos de Información?
+
+- Hacer un inventario de activos
+- Identificar el responsable
+- Determinar su nivel de importancia
+
+https://www.ccn-cert.cni.es/documentos-publicos/1791-magerit-libro-ii-catalogo/file.html
+
+## ¿Qué son los riesgos digitales? Cómo identificarlos y tratarlos
+
+Se debe identificar:
+
+- Tipos de Activos
+- Amenazas: Es un factor externo, aquello que otra persona puede explotar para ocasionar un riesgo.
+- Vulnerabilidades: Son los factores internos. Eso que me expone a mi, que alguien puede explotar y llevar a la pérdida de información.
+- Riesgos inherentes a la seguridad digital
+
+El riesgo puede ser de dos tipos:
+
+- Inherente: Es aquel propio del negocio
+- Residual: Es el que tú tienes la capacidad de soportar
+
+Gestión de Riesgos de Seguridad:
+
+- Valoración de los riesgos inherentes a la seguridad
+- Valoración de la probabilidad de ocurrencia: Qué tan probable es que ese riesgos se materialice.
+- Valoración del impacto: Qué tanto impacto puede tener que se materialice ese riesgo.
+- Identificación de la Zona de Riesgo
+- Definición de controles
+- 5.1 Definición de Controles específicos para prevenir la pérdida de datos
+- Calificación y Evaluación de Controles
+- Gestión y Tratamiento del Riesgo
+- Seguimiento
+
+https://www.owasp.org/images/5/5e/OWASP-Top-10-2017-es.pdf
