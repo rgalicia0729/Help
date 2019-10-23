@@ -1479,3 +1479,11 @@ Los dos elementos clave para esto son:
 Nuestro sitio actualmente presenta un problema con la carga de imágenes si le desactivas el JavaScript, para resolver esto vamos a instalar asset-require-hook lo que nos va a permitir indicarle al servidor donde se encuentran los assets de nuestra aplicación.
 
     npm i -S asset-require-hook
+
+# Integración Backend con Frontend
+
+## ¿Qué es Redux Thunk?
+
+thunk es una función que está dentro de una función; lo que la hace especial es que está siendo retornada a esa función.
+
+redux-thunk hace un attach o bind de la función dispatch (para poder despachar acciones) y la función getState. Esto nos garantiza que al trabajar con funciones asíncronas (por ejemplo, hacer la petición de inicio de sesión o registro de usuario) tengamos que seguir determinados pasos; ejemplo, si hacemos la petición de inicio de sesión y está bien, podremos usar una acción para configurar el estado de nuestro Store.
