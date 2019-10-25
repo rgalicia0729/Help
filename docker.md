@@ -1,3 +1,37 @@
+# Fundamentos De Docker
+
+## Problemáticas del desarrollo de software profesional
+
+A la hora de hacer aplicaciones y proyectos de software nos podemos encontrar con varios problemas, estos problemas los podemos agrupar en tres categorías:
+
+- Construir
+- Distribuir
+- Ejecutar.
+
+Docker promete ser la solución a todo nuestros problemas de una manera simple y sencilla.
+
+## Instalación de Docker
+
+Vamos a ver cómo podemos instalar Docker en diferentes sistemas operativos, tendrás el enlace en los archivos de esta clase.
+
+    Para usuarios Mac o Windows pueden utilizar este enlace:
+    https://www.docker.com/
+
+    Puedes comprobar que todo está funcionando, ingresa el comando ““docker”” en la terminal.
+
+    Para usuarios Linux, este es el enlace:
+    https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
+
+    Comando para que el usuario de ubuntu pueda usar docker.
+
+    $ sudo usermod -aG docker nombre_usuario
+
+## Contenedores
+
+Los contenedores son el concepto fundamentalal hablar de docker. Un contenedor es una entidad lógica, una agrupación de procesos que se ejecutan de forma nativa como cualquier otra aplicación en la máquina host.
+
+Un contenedor ejecuta sus procesos de forma nativa
+
 ## Explorar el estado de docker
 
 Vamos a conocer algunos trucos de nuestra consola para explorar el estado del docker
@@ -66,12 +100,12 @@ Inspeccionar un docker solicitando un elemento en particular de la metadata con 
     docker inspect -f '{{ json.config.env }}' "Nombre del contenedor"
 
 Para renombrar un contenedor
-  
- docker rename "nombre actual" "nombre nuevo"
+
+docker rename "nombre actual" "nombre nuevo"
 
 Iniciar un contenedor con nombre personalizado
-  
- docker run --name "nombre del contenedor" "nombre de la imagen"
+
+docker run --name "nombre del contenedor" "nombre de la imagen"
 
 Mostrar el output del contenedor
 
