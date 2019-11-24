@@ -203,6 +203,26 @@ Los antivirus nos ayudan a protegernos de la mayoría de estos virus y detectar 
 
 Actualiza tu navegador y sistema operativo. También es buena idea tapar la cámara/micrófono cuando no las estamos usando.
 
+## Firewall
+
+Los Firewalls son herramientas que instalamos en nuestros dispositivos para monitorear el tráfico de nuestras redes, identificar amenazas y crear escudos de protección.
+
+## Cookies
+
+Las Cookies son una herramienta que utilizan las páginas web para guardar nuestra información en el navegador y enviarla al servidor cada vez que hacemos una petición.
+
+Debido a la Ley de Protección de Datos de la Unión Europea (GDPR) todos los sitios web deben mostrar un aviso indicándonos que usarán cookies y un link donde podamos leer detalladamente qué datos personales almacenan y para qué serán usados.
+
+## Métodos de defensa: Encriptación
+
+Todos los dispositivos almacenan nuestra información, las computadoras en el disco duro y los celulares en la tarjeta de memoria. Además, estos dispositivos también tienen la opción de encriptar los datos para que solo podamos acceder a ella si conocemos la contraseña o configuramos un sistema de seguridad más avanzado.
+
+## Métodos de defensa: Two factor authentication
+
+El Doble Factor de Autenticación es una funcionalidad que algunas aplicaciones nos nos permiten configurar para agregar nuevos pasos de seguridad además del nombre de usuario/email y contraseña.
+
+Al intentar acceder a nuestra información con contraseña, la aplicación nos mandará un código aleatorio con limite de tiempo que debemos escribir para completar la autenticación. Podemos recibirlo por correo electrónico, mensajes de texto o servicios como Google Authentication.
+
 ## Diseña contraseñas seguras
 
 Cómo crear contraseñas Seguras:
