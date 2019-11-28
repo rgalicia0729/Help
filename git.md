@@ -249,3 +249,104 @@ Esto significa que debes aprender algunos nuevos comandos:
 Las ramas son la forma de hacer cambios en nuestro proyecto sin afectar el flujo de trabajo de la rama principal. Esto porque queremos trabajar una parte muy específica de la aplicación o simplemente experimentar.
 
 La cabecera o HEAD representan la rama y el commit de esa rama donde estamos trabajando. Por defecto, esta cabecera aparecerá en el último commit de nuestra rama principal. Pero podemos cambiarlo al crear una rama (git branch rama, git checkout -b rama) o movernos en el tiempo a cualquier otro commit de cualquier otra rama con los comandos (git reset id-commit, git checkout rama-o-id-commit).
+
+## Solución de conflictos al hacer un merge
+
+Git nunca borra nada a menos que nosotros se lo indiquemos. Cuando usamos los comandos git merge o git checkout estamos cambiando de rama o creando un nuevo commit, no borrando ramas ni commits (recuerda que puedes borrar commits con git reset y ramas con git branch -d).
+
+Git es muy inteligente y puede resolver algunos conflictos automáticamente: cambios, nuevas líneas, entre otros. Pero algunas veces no sabe cómo resolver estas diferencias, por ejemplo, cuando dos ramas diferentes hacen cambios distintos a una misma línea.
+
+Esto lo conocemos como conflicto y lo podemos resolver manualmente, solo debemos hacer el merge, ir a nuestro editor de código y elegir si queremos quedarnos con alguna de estas dos versiones o algo diferente. Algunos editores de código como VSCode nos ayudan a resolver estos conflictos sin necesidad de borrar o escribir líneas de texto, basta con hundir un botón y guardar el archivo.
+
+Recuerda que siempre debemos crear un nuevo commit para aplicar los cambios del merge. Si Git puede resolver el conflicto hará commit automáticamente. Pero, en caso de no pueda resolverlo, debemos solucionarlo y hacer el commit.
+
+Los archivos con conflictos por el comando git merge entran en un nuevo estado que conocemos como Unmerged. Funcionan muy parecido a los archivos en estado Unstaged, algo así como un estado intermedio entre Untracked y Unstaged, solo debemos ejecutar git add para pasarlos al área de staging y git commit para aplicar los cambios en el repositorio.
+
+## Uso de GitHub
+
+GitHub es una plataforma que nos permite guardar repositorios de Git que podemos usar como servidores remotos y ejecutar algunos comandos de forma visual e interactiva (sin necesidad de la consola de comandos).
+
+Luego de crear nuestra cuenta, podemos crear o importar repositorios, crear organizaciones y proyectos de trabajo, descubrir repositorios de otras personas, contribuir a esos proyectos, dar estrellas y muchas otras cosas.
+
+El README.md es el archivo que veremos por defecto al entrar a un repositorio. Es una muy buena práctica configurarlo para describir el proyecto, los requerimientos y las instrucciones que debemos seguir para contribuir correctamente.
+
+Para clonar un repositorio desde GitHub (o cualquier otro servidor remoto) debemos copiar la URL (por ahora, usando HTTPS) y ejecutar el comando git clone + la URL que acabamos de copiar. Esto descargara la versión de nuestro proyecto que se encuentra en GitHub.
+
+Sin embargo, esto solo funciona para las personas que quieren empezar a contribuir en el proyecto. Si queremos conectar el repositorio de GitHub con nuestro repositorio local, el que creamos con git init, debemos ejecutar las siguientes instrucciones:
+
+    Primero: Guardar la URL del repositorio de GitHub
+    con el nombre de origin
+
+    $ git remote add origin URL
+
+    Segundo: Verificar que la URL se haya guardado
+    correctamente:
+
+    $ git remote
+    $ git remote -v
+
+    Tercero: Traer la versión del repositorio remoto y
+    hacer merge para crear un commit con los archivos
+    de ambas partes. Podemos usar git fetch y git merge
+    o solo el git pull con el flag --allow-unrelated-histories:
+
+    $ git pull origin master --allow-unrelated-histories
+
+    Por último, ahora sí podemos hacer git push para guardar
+    los cambios de nuestro repositorio local en GitHub:
+
+    # git push origin master
+
+## Cómo funcionan las llaves públicas y privadas
+
+Las llaves públicas y privadas nos ayudan a cifrar y descifrar nuestros archivos de forma que los podamos compartir archivos sin correr el riesgo de que sean interceptados por personas con malas intenciones.
+
+La forma de hacerlo es la siguiente:
+
+- Ambas personas deben crear su llave pública y privada.
+
+- Ambas personas pueden compartir su llave pública a las otras partes (recuerda que esta llave es pública, no hay problema si la “interceptan”).
+
+- La persona que quiere compartir un mensaje puede usar la llave pública de la otra persona para cifrar los archivos y asegurarse que solo puedan ser descifrados con la llave privada de la persona con la que queremos compartir el mensaje.
+
+- El mensaje está cifrado y puede ser enviado a la otra persona sin problemas en caso de que los archivos sean interceptados.
+
+- La persona a la que enviamos el mensaje cifrado puede usar su llave privada para descifrar el mensaje y ver los archivos.
+
+Puedes compartir tu llave pública pero nunca tu llave privada.
+
+En la siguiente clase vamos a crear nuestras llaves para compartir archivos con GitHub sin correr el riesgo de que sean interceptados.
+
+## Configura tus llaves SSH en local
+
+Primer paso: Generar tus llaves SSH. Recuerda que es muy buena idea proteger tu llave privada con una contraseña.
+
+    $ ssh-keygen -t rsa -b 4096 -C "tu@email.com"
+
+Segundo paso: Terminar de configurar nuestro sistema.
+En Windows y Linux:
+
+    # Encender el "servidor" de llaves SSH de tu computadora:
+    $ eval $(ssh-agent -s)
+
+    # Añadir tu llave SSH a este "servidor":
+    $ ssh-add ruta-donde-guardaste-tu-llave-privada
+
+En Mac:
+
+    # Encender el "servidor" de llaves SSH de tu computadora:
+    $ eval "$(ssh-agent -s)"
+
+    # Si usas una versión de OSX superior a Mac Sierra (v10.12)
+    # debes crear o modificar un archivo "config" en la carpeta
+    # de tu usuario con el siguiente contenido (ten cuidado con
+    # las mayúsculas):
+    Host *
+            AddKeysToAgent yes
+            UseKeychain yes
+            IdentityFile ruta-donde-guardaste-tu-llave-privada
+
+    # Añadir tu llave SSH al "servidor" de llaves SSH de tu
+    # computadora (en caso de error puedes ejecutar este
+    # mismo comando pero sin el argumento -K):
+    $ ssh-add -K ruta-donde-guardaste-tu-llave-privada
