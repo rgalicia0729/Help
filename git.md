@@ -70,16 +70,23 @@ Recuerda que GitBash usa la ruta /c para dirigirse a C:\ (o /d para dirigirse a 
 
 Comandos básicos en la terminal:
 
-pwd: Nos muestra la ruta de carpetas en la que te encuentras ahora mismo.
-mkdir: Nos permite crear carpetas (por ejemplo, mkdir Carpeta-Importante).
-touch: Nos permite crear archivos (por ejemplo, touch archivo.txt).
-rm: Nos permite borrar un archivo o carpeta (por ejemplo, rm archivo.txt). Mucho cuidado con este comando, puedes borrar todo tu disco duro.
-cat: Ver el contenido de un archivo (por ejemplo, cat nombre-archivo.txt).
-ls: Nos permite cambiar ver los archivos de la carpeta donde estamos ahora mismo. Podemos usar uno o más argumentos para ver más información sobre estos archivos (los argumentos pueden ser -- + el nombre del argumento o - + una sola letra o shortcut por cada argumento). - ls -a: Mostrar todos los archivos, incluso los ocultos. - ls -l: Ver todos los archivos como una lista.
-cd: Nos permite navegar entre carpetas. - cd /: Ir a la ruta principal: - cd o cd ~: Ir a la ruta de tu usuario - cd carpeta/subcarpeta: Navegar a una ruta dentro de la carpeta donde estamos ahora mismo. - cd .. (cd + dos puntos): Regresar una carpeta hacia atrás. - Si quieres referirte al directorio en el que te encuentras ahora mismo puedes usar cd . (cd + un punto).
-history: Ver los últimos comandos que ejecutamos y un número especial con el que podemos repetir su ejecución.
-! + número: Ejecutar algún comando con el número que nos muestra el comando history (por ejemplo, !72).
-clear: Para limpiar la terminal. También podemos usar los atajos de teclado Ctrl + L o Command + L.
+- pwd: Nos muestra la ruta de carpetas en la que te encuentras ahora mismo.
+
+- mkdir: Nos permite crear carpetas (por ejemplo, mkdir Carpeta-Importante).
+
+- touch: Nos permite crear archivos (por ejemplo, touch archivo.txt).
+
+- rm: Nos permite borrar un archivo o carpeta (por ejemplo, rm archivo.txt). Mucho cuidado con este comando, puedes borrar todo tu disco duro.
+- cat: Ver el contenido de un archivo (por ejemplo, cat nombre-archivo.txt).
+
+- ls: Nos permite cambiar ver los archivos de la carpeta donde estamos ahora mismo. Podemos usar uno o más argumentos para ver más información sobre estos archivos (los argumentos pueden ser -- + el nombre del argumento o - + una sola letra o shortcut por cada argumento). - ls -a: Mostrar todos los archivos, incluso los ocultos. - ls -l: Ver todos los archivos como una lista.
+
+- cd: Nos permite navegar entre carpetas. - cd /: Ir a la ruta principal: - cd o cd ~: Ir a la ruta de tu usuario - cd carpeta/subcarpeta: Navegar a una ruta dentro de la carpeta donde estamos ahora mismo. - cd .. (cd + dos puntos): Regresar una carpeta hacia atrás. - Si quieres referirte al directorio en el que te encuentras ahora mismo puedes usar cd . (cd + un punto).
+
+- history: Ver los últimos comandos que ejecutamos y un número especial con el que podemos repetir su ejecución.
+  ! + número: Ejecutar algún comando con el número que nos muestra el comando history (por ejemplo, !72).
+
+- clear: Para limpiar la terminal. También podemos usar los atajos de teclado Ctrl + L o Command + L.
 
 Todos estos comandos tiene una función de autocompletado, o sea, puedes escribir la primera parte y presionar la tecla Tab para que la terminal nos muestre todas las posibles carpetas o comandos que podemos ejecutar. Si presionas la tecla Arriba puedes ver el último comando que ejecutamos.
 
@@ -214,3 +221,31 @@ Bueno, todos los cambios están en el área de Staging, incluido el archivo con 
 En cambio, si usamos git reset HEAD, lo único que haremos será mover estos cambios de Staging a Unstaged. Seguiremos teniendo los últimos cambios del archivo, el repositorio mantendrá el archivo (no con sus últimos cambios pero sí con los últimos en los que hicimos commit) y no habremos perdido nada.
 
 Conclusión: Lo mejor que puedes hacer para salvar tu puesto y evitar un incendio en tu trabajo es conocer muy bien la diferencia y los riesgos de todos los comandos de Git.
+
+## Flujo de trabajo básico con un repositorio remoto
+
+No veas esta clase a menos que hayas practicado todos los comandos de las clases anteriores.
+
+Por ahora, nuestro proyecto vive únicamente en nuestra computadora. Esto significa que no hay forma de que otros miembros del equipo trabajen en él.
+
+Para solucionar esto están los servidores remotos: un nuevo estado que deben seguir nuestros archivos para conectarse y trabajar con equipos de cualquier parte del mundo.
+
+Estos servidores remotos pueden estar alojados en GitHub, GitLab, BitBucket, entre otros. Lo que van a hacer es guardar el mismo repositorio que tienes en tu computadora y darnos una URL con la que todos podremos acceder a los archivos del proyecto para descargarlos, hacer cambios y volverlos a enviar al servidor remoto para que otras personas vean los cambios, comparen sus versiones y creen nuevas propuestas para el proyecto.
+
+Esto significa que debes aprender algunos nuevos comandos:
+
+- git clone url_del_servidor_remoto: Nos permite descargar los archivos de la última versión de la rama principal y todo el historial de cambios en la carpeta .git.
+
+- git push: Luego de hacer git add y git commit debemos ejecutar este comando para mandar los cambios al servidor remoto.
+
+- git fetch: Lo usamos para traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local (en caso de que hayan, por supuesto).
+
+- git merge: También usamos el comando git fetch con servidores remotos. Lo necesitamos para combinar los últimos cambios del servidor remoto y nuestro directorio de trabajo.
+
+- git pull: Básicamente, git fetch y git merge al mismo tiempo.
+
+## Introducción a las ramas o branches de Git
+
+Las ramas son la forma de hacer cambios en nuestro proyecto sin afectar el flujo de trabajo de la rama principal. Esto porque queremos trabajar una parte muy específica de la aplicación o simplemente experimentar.
+
+La cabecera o HEAD representan la rama y el commit de esa rama donde estamos trabajando. Por defecto, esta cabecera aparecerá en el último commit de nuestra rama principal. Pero podemos cambiarlo al crear una rama (git branch rama, git checkout -b rama) o movernos en el tiempo a cualquier otro commit de cualquier otra rama con los comandos (git reset id-commit, git checkout rama-o-id-commit).
