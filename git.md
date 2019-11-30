@@ -350,3 +350,59 @@ En Mac:
     # computadora (en caso de error puedes ejecutar este
     # mismo comando pero sin el argumento -K):
     $ ssh-add -K ruta-donde-guardaste-tu-llave-privada
+
+## Conexión a GitHub con SSH
+
+Luego de crear nuestras llaves SSH podemos entregarle la llave pública a GitHub para comunicarnos de forma segura y sin necesidad de escribir nuestro usuario y contraseña todo el tiempo.
+
+Para esto debes entrar a la Configuración de Llaves SSH en GitHub, crear una nueva llave con el nombre que le quieras dar y el contenido de la llave pública de tu computadora.
+
+Ahora podemos actualizar la URL que guardamos en nuestro repositorio remoto, solo que, en vez de guardar la URL con HTTPS, vamos a usar la URL con SSH:
+
+    $ git remote set-url origin url-ssh-del-repositorio-en-github
+
+Comando para ver la historia del proyecto.
+
+    $ git log --all --graph --decorate --oneline
+
+## Tags y versiones en Git y GitHub
+
+Los tags o etiquetas nos permiten asignar versiones a los commits con cambios más importantes o significativos de nuestro proyecto.
+
+Comandos para trabajar con etiquetas:
+
+- Crear un nuevo tag y asignarlo a un commit: git tag -a nombre-del-tag id-del-commit.
+
+- Borrar un tag en el repositorio local: git tag -d nombre-del-tag.
+
+- Listar los tags de nuestro repositorio local: git tag o git show-refs --tags.
+
+- Publicar un tag en el repositorio remoto: git push origin --tags.
+
+- Borrar un tag del repositorio remoto: git tag -d nombre-del-tag y git push origin :refs/tags/nombre-del-tag.
+
+## Manejo de ramas en GitHub
+
+Puedes trabajar con ramas que nunca envias a GitHub, así como pueden haber ramas importantes en GitHub que nunca usas en el repositorio local. Lo importantes que aprendas a manejarlas para trabajar profesionalmente.
+
+- Crear una rama en el repositorio local: git branch nombre-de-la-rama o git checkout -b nombre-de-la-rama.
+
+- Publicar una rama local al repositorio remoto: git push origin nombre-de-la-rama.
+
+Recuerda que podemos ver gráficamente nuestro entorno y flujo de trabajo local con Git usando el comando gitk.
+
+Tambien puedes ver las ramas que existen y cual es su historia.
+
+    $ git show-branch
+
+Si quieres ver mas información sobre las ramas puedes hacer el siguiente comando.
+
+    $ git show-branch --all
+
+## Configurar múltiples colaboradores en un repositorio de GitHub
+
+Por defecto, cualquier persona puede clonar o descargar tu proyecto desde GitHub, pero no pueden crear commits, ni ramas, ni nada.
+
+Existen varias formas de solucionar esto para poder aceptar contribuciones. Una de ellas es añadir a cada persona de nuestro equipo como colaborador de nuestro repositorio.
+
+Solo debemos entrar a la configuración de colaboradores de nuestro proyecto (Repositorio > Settings > Collaborators) y añadir el email o username de los nuevos colaboradores.
