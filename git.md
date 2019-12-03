@@ -412,3 +412,71 @@ Solo debemos entrar a la configuración de colaboradores de nuestro proyecto (Re
 En un entorno profesional normalmente se bloquea la rama master, y para enviar código a dicha rama pasa por un code review y luego de su aprobación se unen códigos con los llamados merge request.
 
 Para realizar pruebas enviamos el código a servidores que normalmente los llamamos staging develop (servidores de pruebas) luego de que se realizan las pruebas pertinentes tanto de código como de la aplicación estos pasan a el servidor de producción con el ya antes mencionado merge request.
+
+## Git Rebase: Reorganizando el trabajo realizado
+
+El comando rebase es una mala práctica, nunca se debe usar, pero para efectos de curso te lo vamos a enseñar para que hagas tus propios experimentos. Con rebase puedes recoger todos los cambios confirmados en una rama y ponerlos sobre otra.
+
+    # Cambiamos a la rama que queremos traer los cambios
+    git checkout experiment
+
+    # Aplicamos rebase para traer los cambios de la rama que queremos
+    git rebase master
+
+## Git Stash: Guardar cambios en memoria y recuperarlos después
+
+Cuando necesitamos regresar en el tiempo porque borramos alguna línea de código pero no queremos pasarnos a otra rama porque nos daría un error ya que debemos pasar ese “mal cambio” que hicimos a stage, podemos usar git stash para regresar el cambio anterior que hicimos.
+
+git stash es típico cuando estamos cambios que no merecen una rama o no merecen un rebase si no simplemente estamos probando algo y luego quieres volver rápidamente a tu versión anterior la cual es la correcta.
+
+## Git Clean: Limpiar tu proyecto de archivos no deseados
+
+A veces creamos archivos cuando estamos realizando nuestro proyecto que realmente no forman parte de nuestro directorio de trabajo, que no se debería agregar y lo sabemos.
+
+- Para saber qué archivos vamos a borrar tecleamos git clean --dry-run
+
+- Para borrar todos los archivos listados (que no son carpetas) tecleamos git clean -f
+
+## Git cherry-pick: Traer commits viejos al head de un branch
+
+Existe un mundo alternativo en el cual vamos avanzando en una rama pero necesitamos en master uno de esos avances de la rama, para eso utilizamos el comando git cherry-pick IDCommit.
+
+cherry-pick es una mala práctica porque significa que estamos reconstruyendo la historia, usa cherry-pick con sabiduría. Si no sabes lo que estás haciendo ten mucho cuidado.
+
+## Reconstruír commits en Git con amend
+
+A veces hacemos un commit, pero resulta que no queríamos mandarlo porque faltaba algo más. Utilizamos git commit --amend, amend en inglés es remendar y lo que hará es que los cambios que hicimos nos lo agregará al commit anterior.
+
+    $ git commit --amend
+
+## Git Reset y Reflog: Úsese en caso de emergencia
+
+¿Qué pasa cuando todo se rompe y no sabemos qué está pasando? Con git reset HashDelHEAD nos devolveremos al estado en que el proyecto funcionaba.
+
+- git reset --soft HashDelHEAD te mantiene lo que tengas en staging ahí.
+
+- git reset --hard HashDelHEAD resetea absolutamente todo incluyendo lo que tengas en staging.
+
+git reset es una mala práctica, no deberías usarlo en ningún momento; debe ser nuestro último recurso.
+
+## Buscar en archivos y commits de Git con Grep y log
+
+A medida que nuestro proyecto se hace grande vamos a querer buscar ciertas cosas.
+
+Por ejemplo: ¿cuántas veces en nuestro proyecto utilizamos la palabra color?
+
+Para buscar utilizamos el comando git grep color y nos buscará en todo el proyecto los archivos en donde está la palabra color.
+
+- Con git grep -n color nos saldrá un output el cual nos dirá en qué línea está lo que estamos buscando.
+
+- Con git grep -c color nos saldrá un output el cual nos dirá cuántas veces se repite esa palabra y en qué archivo.
+
+- Si queremos buscar cuántas veces utilizamos un atributo de HTML lo hacemos con git grep -c "<p>".
+
+## Tu futuro con Git y Github
+
+¡Felicitaciones por terminar el Curso profesional de Git y GitHub!
+
+Aprendimos cómo usar Git y GitHub, hacer merge request, investigar quién hizo qué a través de la línea de comandos, cómo utilizar GitHub Pages, cómo revertir cambios y mucho más. Ahora queda de tu parte experimentar, fallar, subir, borrar y por último hacer deploy de tu proyecto y compartirlo con la comunidad.
+
+Recuerda resolver los ejercicios, completar el examen, darle 5 estrellas al profesor y compartir tu proyecto, notas, todas tus dudas y comentarios en la sección de discusiones.
