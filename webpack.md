@@ -69,6 +69,103 @@ $ npx webpack -v
 Para combilar el index.js con webpack podemos utilizar el siguiente comando, esto
 solo como base de prueba
 
-$ npx webpack --entry ./index.js --output ./bundle.js
+$ npx webpack --entry ./index.js --output ./bundle.js --mode development
+
+## Iniciando un webpack.config
+
+Al ir creciendo nuestra configuración de Webpack iremos agregando cada vez más banderas a nuestros comandos y terminará como una línea gigante en la terminal. ¿Cómo hacemos que esa línea sea muy pequeñita, personalizable y escalable? Por medio de un archivo llamado por defecto webpack.config.js.
+
+Este archivo permite importar módulos usando el formato commonJS y recibe por lo menos dos configuraciones básicas, un entry y un output.
 
 
+- Entry Point: Es la ruta del archivo principal de nuestra aplicación JS a ser procesado por Webpack. Se pueden tener varios Entry Points.
+- Output: Es la ruta de salida donde va a generar nuestro bundle con todos nuestros archivos especificados como Entry Points empaquetados en uno sólo.
+
+En el archivo webpack.config.js agregamos la configuración de Webpack para nuestro proyecto, lo que hicimos utilizando la linea de comandos lo vamos hacer configurando el webpack.config.js, esto queda de la siguiente manera:
+
+```javascript 
+const path = require('path');
+
+module.exports = {
+  entry: path.resolve(__dirname, 'index.js'),
+  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  }
+}
+```
+
+Para ejecutar webpack con esta configuración lo hacemos simplemente ejecutando el siguiente comando.
+
+$ npx webpack
+
+Podemos agregar nuestro comando de ejecucción de webpack en el package.json asi:
+
+```json
+
+"scripts": {
+  "build": "webpack"
+},
+
+```
+
+## Cargando configuraciones por defecto y personalizadas
+
+Por medio del uso de la bandera --config podemos especificar un archivo de configuración externo con el nombre que queramos en lugar del nombre por defecto webpack.config.js.
+
+```json
+
+"scripts": {
+  "build": "webpack --config ./ubicacion/archivo-config.js"
+},
+
+```
+
+## Múltiples puntos de entrada
+
+Al tener multiples puntos de entrada tambien tenemos multiples puntos de salida, la configuracion seria de la siguiente manera.
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  entry: {
+    home: path.resolve(__dirname, 'index.js'),
+    menu: path.resolve(__dirname, 'menu.js'),
+  },
+  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  }
+}
+```
+
+## Manejo de assets con Loaders
+
+Los Loaders son la funcionalidad que nos da Webpack para interpretar tipos de archivos no soportados de forma nativa por Javascript.
+
+style-loader sirve para inyectar un tag style (el CSS) al DOM de nuestro HTML, mientras que css-loader sólo sirve para interpretar archivos CSS.
+
+Se necesita instalar css-loader y style-loader
+
+    $ npm install --save-dev css-loader
+
+    $ npm install --save-dev style-loader
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  }
+}
+```
