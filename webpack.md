@@ -169,3 +169,65 @@ module.exports = {
   }
 }
 ```
+
+## Introducción al uso de plugins
+
+Los Plugins sirven para extender las capacidades de webpack y dar más poder a los loaders. Vamos a instalar el plugin de mini-css-extract-plugin y html-webpack-plugin, para ello vamos a utilizar el siguiente comando.
+
+$ npm install mini-css-extract-plugin html-webpack-plugin --save-dev
+
+Para instalarlo vamos a utilizar la siguiente configuracion.
+
+```javascript
+const path = require('path');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: {
+    bundle: path.resolve(__dirname, 'index.js'),
+  },
+  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCSSExtractPlugin.loader
+          },
+          'css-loader'
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new MiniCSSExtractPlugin({
+      filename: 'css/[name].css'
+    })
+  ]
+}
+```
+
+## Servidor de desarrollo
+
+El servidor de desarrollo nos ayuda a mejorar nuestra experiencia de desarrollo, ya no tenemos que estar recargando la pagina cuando realizamos algun cambio y para ello vamos a instalar el servidor de desarrollo de webpack con el siguiente comando:
+
+$ npm install webpack-dev-server --save-dev
+
+Cambiamos el script del package.json
+
+```json
+"scripts": {
+  "dev": "webpack-dev-server",
+  "build": "webpack"
+},
+```
+
+## Hot Module Replacement
+
