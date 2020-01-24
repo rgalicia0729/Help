@@ -52,24 +52,24 @@ El comando webpack tiene una bandera llamada --mode que nos permite cambiar entr
 
 Creamos un proyecto de JavaScript.
 
-$ npm init -y
+    $ npm init -y
 
 Ahora instalamos webpack
 
-$ npm install webpack --save-dev
+    $ npm install webpack --save-dev
 
 Instalamos el CLI de webpack
 
-$ npm install webpack-cli --save-dev
+    $ npm install webpack-cli --save-dev
 
 Para poder saber la versión de webpack utilizamos el siguiente comando
 
-$ npx webpack -v
+    $ npx webpack -v
 
 Para combilar el index.js con webpack podemos utilizar el siguiente comando, esto
 solo como base de prueba
 
-$ npx webpack --entry ./index.js --output ./bundle.js --mode development
+    $ npx webpack --entry ./index.js --output ./bundle.js --mode development
 
 ## Iniciando un webpack.config
 
@@ -98,7 +98,7 @@ module.exports = {
 
 Para ejecutar webpack con esta configuración lo hacemos simplemente ejecutando el siguiente comando.
 
-$ npx webpack
+    $ npx webpack
 
 Podemos agregar nuestro comando de ejecucción de webpack en el package.json asi:
 
@@ -174,7 +174,7 @@ module.exports = {
 
 Los Plugins sirven para extender las capacidades de webpack y dar más poder a los loaders. Vamos a instalar el plugin de mini-css-extract-plugin y html-webpack-plugin, para ello vamos a utilizar el siguiente comando.
 
-$ npm install mini-css-extract-plugin html-webpack-plugin --save-dev
+    $ npm install mini-css-extract-plugin html-webpack-plugin --save-dev
 
 Para instalarlo vamos a utilizar la siguiente configuracion.
 
@@ -218,7 +218,7 @@ module.exports = {
 
 El servidor de desarrollo nos ayuda a mejorar nuestra experiencia de desarrollo, ya no tenemos que estar recargando la pagina cuando realizamos algun cambio y para ello vamos a instalar el servidor de desarrollo de webpack con el siguiente comando:
 
-$ npm install webpack-dev-server --save-dev
+    $ npm install webpack-dev-server --save-dev
 
 Cambiamos el script del package.json
 
@@ -229,5 +229,151 @@ Cambiamos el script del package.json
 },
 ```
 
-## Hot Module Replacement
+## Soporte de Javascript moderno
 
+Javascript es un lenguaje moderno en evolución, siempre agregando nuevas funciones. El problema es que al ser interpretado en el navegador, no tenemos control sobre que versión de Javascript soportan y por lo tanto que funciones.
+
+Para poder usar Javascript moderno y tener una buena Developer Experience sin afectar la User Experience, existe Babel. Babel transpila nuestro código moderno de Javascript a una una versión que todos los navegadores pueden entender.
+
+Agregamos una nueva regla para interceptar archivos de javascript y transpilarlos con webpack.
+
+```javascript
+rules: [
+  {
+    test: /\.js$/,
+    use: 'babel-loader',
+    exclude: /node_modules/,
+  },
+]
+```
+
+Ahora vamos a configurar algunas reglas de babel y para ello creamos un nuevo archivo llamado .babelrc y tambien vamos a instalar las siguientes dependencias.
+
+    $ npm install --save-dev @babel/core babel-loader @babel/preset-env
+
+La configuración de .babelrc es la siguiente:
+
+```json
+{
+  "presets": [
+    "@babel/preset-env"
+  ]
+}
+```
+
+Para trabajar con funciones asincronas necesitamos instalar otra dependencia con babel.
+
+    $ npm install --save-dev @babel/plugin-transform-runtime
+
+Luego de instalar el plugin es necesario instalar el core de este plugin.
+
+    $ npm install --save @babel/runtime
+
+Ahora agregamos unas modificaciones en .babelrc
+
+```json
+{
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
+  "presets": [
+    "@babel/preset-env"
+  ]
+}
+```
+
+## Soporte de JSX (React)
+
+JSX es un lenguaje de templates para React que permite definir componentes con un código muy similar al HTML.
+
+No existe navegador que entienda JSX porque no es un estándar, es algo especifico de React. Afortunadamente Babel puede transpilar el código JSX de nuestros archivos JS a código que el navegador.
+
+Instalamos las dependencias core para trabajar con react
+
+$ npm install --save react react-dom
+
+Para que babel le de soporte a react vamos a instalar lo siguiente:
+
+$ npm install --save-dev @babel/preset-react
+
+Ahora agregamos una nueva configuracion al .babelrc
+
+```json
+{
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+```
+
+## Soporte imágenes, fuentes y videos
+
+Para soportar la importación de archivos binarios en nuestro código Javascript cómo lo son: fuentes, imágenes y videos, podemos usar url-loader.
+
+url-loader transforma archivos a un cadena de texto base64 para que carguen dentro de nuestros archivos Javascript y así ahorrarnos un request al servidor por cada archivo transformado.
+
+Debemos tomar en cuenta que sólo nos conviene convertir archivos pequeños, ya que archivos muy grandes podrían hacer nuestro archivo bundle muy pesado. Es por esto que la opción limit del url-loader sirve para asignar el peso máximo que un archivo puede tener para ser transformado en base64.
+
+No olvides instalar file-loader junto con url-loader ya que cuando se sobrepasa el limite establecido en la opción limit y el archivo no pueda ser transformado a base64, url-loader hará uso del file-loader para insertar un nombre y ruta de archivo en el lugar correspondiente.
+
+    $ npm install --save-dev url-loader file-loader
+
+Ahora agregamos la siguiente regla
+
+```javascript
+{
+  text: /\.jpg|png|gif|svg|mp4$/,
+  use: {
+    loader: 'url-loader',
+    options: {
+      limit: 90000,
+    }
+  }
+}
+```
+
+## Estilos con preprocesadores
+
+Es una práctica común usar preprocesadores de CSS como: Sass, Less, Stylus y hasta PostCSS. Webpack permite integrar estos preprocesadores en su configuración a través de loaders, sólo ten cuidado con las peerDependencies que son dependencias que el loader espera estén instaladas previamente, como el caso de stylus para stylus-loader.
+
+    $ npm install --save-dev sass-loader stylus-loader less-loader 
+
+    $ npm install --save-dev stylus less node-sass
+
+```javascript
+  {
+    test: /\.less$/,
+    use: [
+      {
+        loader: MiniCSSExtractPlugin.loader
+      },
+      'css-loader',
+      'less-loader'
+    ]
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      {
+        loader: MiniCSSExtractPlugin.loader
+      },
+      'css-loader',
+      'sass-loader'
+    ]
+  },
+  {
+    test: /\.styl$/,
+    use: [
+      {
+        loader: MiniCSSExtractPlugin.loader
+      },
+      'css-loader',
+      'sass-loader',
+      'stylus-loader',
+    ]
+  },
+```
