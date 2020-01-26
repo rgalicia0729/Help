@@ -377,3 +377,30 @@ Es una práctica común usar preprocesadores de CSS como: Sass, Less, Stylus y h
     ]
   },
 ```
+
+## Evitar código duplicado
+
+Ver la documentación https://webpack.js.org/plugins/split-chunks-plugin/
+
+```javascript
+module.exports = {
+  optimization: {
+    splitChunks: {
+        chunks: 'all',
+        minSize: 0,
+        name: 'commons'
+    }
+  }
+}
+```
+
+## Añadiendo un Dynamic Link Library
+
+Mientras más librerías agregamos más lento se empiezan a volver nuestros builds, arruinando así la Developer Experience. Por suerte podemos crear una (o varias) Dynamic Link Library para acortar estos tiempos.
+
+Una Dynamic Link Library (DLL) es un conjunto de librerías comunes que no cambian frecuentemente por lo que se hace un build por adelantado de las mismas para no re-empaquetar cada vez que hacemos build de nuestra aplicación.
+
+Beneficiando tanto la Developer Experience como la User Experience ya que el caché del navegador va a mantener una copia que solo va a cambiar cuando nosotros agreguemos o quitemos alguna dependencia, ahorrando así valiosos requests al servidor.
+
+## Ejemplo de configuración de entorno de Desarrollo
+
