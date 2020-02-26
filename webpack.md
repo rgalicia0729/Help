@@ -402,5 +402,3 @@ Una Dynamic Link Library (DLL) es un conjunto de librerías comunes que no cambi
 
 Beneficiando tanto la Developer Experience como la User Experience ya que el caché del navegador va a mantener una copia que solo va a cambiar cuando nosotros agreguemos o quitemos alguna dependencia, ahorrando así valiosos requests al servidor.
 
-## Ejemplo de configuración de entorno de Desarrollo
-
