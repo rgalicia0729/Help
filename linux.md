@@ -1,5 +1,7 @@
 # Sistema Operativo Linux
 
+# Administración de Servidores Linux
+
 ## Distribuciones más utilizadas de Linux
 
 Vamos a usar dos distribuciones de Linux: Ubuntu Server en su versión 18.04 y CentOS Server versión 7.
@@ -110,4 +112,129 @@ Si quieres verificar cuales son los 5 procesos que mas estan consumiendo CPU pue
 Si lo que quieres es verificar que servicios son los que estan consumiendo mas ram puedes hacer uso del siguiente comando.
 
     $ $ sudo ps auxf | sort -nr -k 4 | head -5
+
+## Análisis de los parámetros de red
+
+Una IP es un identificador único para los equipos que están conectados a una red.
+
+Las IPs Privadas se utilizan para identificar los dispositivos dentro de una red local. Por ejemplo: los dispositivos conectados en tu casa u oficina.
+
+Las IPs Públicas son la que se asignan a cualquier dispositivo conectado a Internet. Por ejemplo: los servidores que alojan tus sitios web, el router que te da acceso a internet, entre otros.
+
+Si tu dispositivo tiene una IP pública significa que puede conectarse a otro que también tenga una. Por esto mismo, no puede haber dos dispositivos con la misma IP pública.
+
+Para encontrar la dirección IP de nuestros dispositivos podemos usar los comandos ifconfig en Linux y Mac o ipconfig en Windows. También podemos usar el comando ip a.
+
+Para ver el nombre/identificador de nuestro equipo en todas las redes podemos usar el comando hostname. También podemos ver qué dispositivo nos permite acceso a Internet con el comando route -n.
+
+Para identificar las IPs de diferentes dominios podemos usar el comando nslookup nombredominio.ext. También podemos usar el comando curl para realizar consultas a algún servidor y tambien puedes utilizar wget.
+
+## Administración de paquetes acorde a la distribución
+
+Cada distribución de Linux maneja su software de maneras diferentes.
+Red Hat / CentOS / Fedora
+
+Su gestor de paquetes es .rpm (Red hat Package Manager). La base de datos de este gestor está localizada en /var/lib/rpm.
+
+El comando rpm -qa nos permite listar todos los rpms instalados en la máquina. Con rpm -i nombre-del-paquete.rpm instalamos los paquetes y con rpm -e nombre-del-paquete.rpm los removemos el sistema.
+
+Los paquetes se pueden instalar desde un repositorio sin tener que conocer la ruta del archivo o las dependencias con el comando yum install nombre-del-paquete.
+
+También podemos buscar paquetes más específicos con el comando yum search posible-nombre-del-paquete .
+Debian / Ubuntu
+
+Su administración de paquetes es .deb. Podemos realizar las instalaciones con dpkg -i nombre-del-paquete.deb o repositorios apt.
+
+Su base de datos está localizada en /var/lib/dpkg. Con el comando dpkg -l listamos todos los debs instalados en la máquina. Instalamos los paquetes con dpkg -i nombre-del-paquete y los removemos del sistema con dpkg -r nombre-del-paquete.
+
+Si ya tenemos software configurado podemos usar el comando dpkg-reconfigure nombre-paquete para volver a ejecutar el asistente de configuración (si está disponible).
+
+También podemos realizar las instalaciones con el comando apt install nombre-paquete y búsquedas de paquetes con apt search posible-nombre-paquete.
+
+## Manejo de paquetes en sistemas basados en Debian
+
+Antes de actualizar el software de nuestro sistema debemos ejecutar el comando sudo apt update para saber qué paquetes pueden actualizarse y desde dónde se realizará la descarga. Luego de esto podremos actualizar todas las herramientas del sistema usando el comando sudo apt upgrade.
+
+Recuerda que todo lo que tenga que ver con actualizaciones o modificaciones del sistema operativo necesitará permisos con sudo. También necesitarás conexión a Internet.
+
+## Nagios: Desempaquetado, descompresión, compilación e instalación de paquetes
+
+No todo el software que necesitamos se encuentra en los repositorios. Debido a esto, algunas veces debemos descargar el software, realizar un proceso de descompresión y desempaquetado para finalmente instalar la herramienta.
+
+Instalación de algunas herramientas para manejar una base de datos MySQL (recuerda que instalaremos y trabaremos con MySQL en una próxima clase):
+
+    $ sudo apt install build-essential libgd-dev openssl libssl-dev unzip apache2 php gcc libdbi-perl libdbd-mysql-perl
+
+Instalación de Nagios:
+
+    $ wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.4.tar.gz -O nagioscore.tar.gz
+
+Descomprimir y desempaquetar archivos con tar:
+
+    $ tar xvzf nagioscore.tar.gz
+
+Este comando creará una carpeta nagios-4.4.4. El nombre de la carpeta puede variar dependiendo de la versión que descargaste. Entrando a esta carpeta podemos ejecutar diferentes archivos y comandos para configurar el software y realizar la instalación.
+
+
+    $ sudo ./configure --with-https-conf=/etc/apache2/sites-enabled
+
+    $ sudo make all
+
+    $ sudo make install
+
+    $ sudo make install-init
+
+    $ sudo make install-commandmode
+
+    $ sudo make install-config
+
+    $ sudo make install-webconf
+
+Por último, para administrar el servicio de nagios podemos usar el comando sudo systemctl (status, start, restart, reload, stop, enable, disable, list-dependencies) nagios.
+
+## Los usuarios, una tarea vital en el proceso de administración del sistema operativo
+
+El comando id nos muestra el identificador único (uid) de cada usuario en nuestro sistema operativo. El ID 0 está reservado para el usuario root.
+
+Con el comando whoami podemos ver con qué usuario estamos trabajando en este momento. Podemos ver todos los usuarios del sistema leyendo el archivo /etc/passwd.
+
+Las contraseñas de los usuarios están almacenadas en el archivo etc/shadow, pero están cifradas. Y solo el usuario root tiene permisos de lectura/escritura.
+
+Para cambiar la contraseña de nuestros usuarios usamos el comando passwd.
+
+## Creando y manejando cuentas de usuario en el sistema operativo
+
+Comandos para administrar cuentas de usuarios:
+
+- sudo useradd nombre-usuario: crea un usuario sin asignarle inmediatamente alguna contraseña ni consultar más información. Debemos terminar de configurar esta cuenta a mano posteriormente.
+
+- sudo adduser nombre-usuario: crea un nuevo usuario con contraseña y algo más de información. También creará una nueva carpeta en la carpeta /home/.
+
+- userdel nombre-usuario: eliminar cuentas de usuarios.
+
+- usermod: modificar la información de alguna cuenta.
+
+Nunca modifiques a mano el archivo /etc/passwd. Para administrar los usuarios debemos usar los comandos que estudiamos en clase.
+
+## Entendiendo la membresía de los grupos
+
+Los grupos nos ayudan a darle los mismos permisos a diferentes usuarios al mismo tiempo, sin necesidad de asignar el mismo permiso a cada usuario individualmente. Todos los usuarios que pertenezcan al mismo grupo tendrán los mismos permisos.
+
+Para cambiar de usuario sin necesidad de reiniciar el sistema podemos usar el comando su - nombre-usuario. También podemos cambiar de usuario sin necesidad de saber su contraseña usando el comando sudo su - nombre-usuario.
+
+Para ver a qué grupos pertenecen nuestros usuarios usamos el comando groups nombre-usuario. Para agregar usuarios a un nuevo grupo usamos el comando sudo gpasswd -a nombre-usuario nombre-grupo. Los eliminamos de la misma forma con gpasswd -d.
+
+Para esto también podemos usar el comando sudo usermod -aG nombre-grupo nombre-usuario. Recuerda que en este caso el orden en que escribimos el grupo y el ususario se invierte.
+
+Para listar los permisos de nuestros usuarios ejecutamos el comando sudo -l.
+
+
+## Usando PAM para el control de acceso de usuarios
+
+PAM es un mecanismo para administrar a los usuarios de nuestro sistema operativo. Nos permite autenticar usuarios, controlar la cantidad de procesos que ejecutan cada uno, verificar la fortaleza de sus contraseñas, ver la hora a la que se conectan por SSH, entre otras.
+
+Con el comando pwscore podemos probar qué tan fuertes son nuestras contraseñas. Recuerda que para usar este comando en sistemas basados en Ubuntu debemos instalar el paquete libpwquality-tools.
+
+El comando ulimit nos ayuda a listar los permisos de nuestros usuarios. Para limitar el número de procesos que nuestros usuarios pueden realizar ejecutamos ulimit -u max-numero-procesos.
+
 
