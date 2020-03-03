@@ -1,5 +1,11 @@
 # Sistema Operativo Linux
 
+# Introducción a la terminal
+
+
+
+# Administración de Servidores
+
 ## Distribuciones más utilizadas de Linux
 
 Vamos a usar dos distribuciones de Linux: Ubuntu Server en su versión 18.04 y CentOS Server versión 7.
