@@ -133,7 +133,46 @@ Tratamiento de texto delimitado
 
     $ awk -F ',' 'NR > 1 && $3 > 0 { print $1, $3 * 4 }' 'nombre del archivo' -> Imprime si sucede una condicion y puede calcular entre columnas.
 
-    
+
+## Comunicación entre procesos: Qué son y cómo se utilizan los flujos estándar
+
+Si lo que deseamos es ejecutar un programa y enviarle información que se encuentra en un arhivo para que sea ejecutado con las instrucciones del archivo. Por ejemplo ejecutamos mysql y le enviamos instrucciones que se encuentran en un archivo llamado backup.sql lo hacemos de la siguiente manera.
+
+    $ mysql -h 127.0.0.1 -u root -p123 < backup.sql
+
+Ahora si lo que deseamos es ejecutar un programa y escribir los resultados en un archivo para luego analizarlos, lo hacemos de la siguiente manera.
+
+    $ ls -l > data.txt
+
+Con la instrucción anterior si el archivo existe se remplaza por uno nuevo, si lo que queremos es enviar el resultado al final del archivo hacemos lo siguiente.
+
+    $ ls -la >> data.txt
+
+En muchas ocaciones lo que vamos a necesitar es encadenar procesos, esto lo podemos hacer mas facil utilizando los pipe. A continuación se muestra un ejemplos de conteo de lineas sobre un archivo.
+
+    $ cat data.txt | wc -l
+
+## Administración de procesos en background y foreground
+
+Si deseas ejecutar procesos en segundo plano se coloca el signo & al final del comando
+
+    $ mysql -h 127.0.0.1 -u root -p123 < dump.sql &
+
+Para ver los procesos que se estan ejecutando
+
+    $ ps
+
+Si queremos ver todos los procesos que se estan ejecutando en el sistema
+
+    $ ps ax
+
+Ver los procesos en tiempo real
+
+    $ top
+
+Como detener un proceso inmediatamente
+
+    $ kill -9 'PID'
 
 
 
