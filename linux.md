@@ -289,3 +289,28 @@ Para desagrupar los archivos de .tar
 Para agrupar los archivos y comprimir
 
     $ tar czf 'nombre-de-resultado.tgz' 'nombre de los archivos para agrupar y comprimir'
+
+## Herramientas de búsqueda de archivos
+
+Hacer una busqueda en todo el sistema de archivos solo con el nombre.
+
+    $ sudo updatedb
+
+    $ locate 'Nombre del archivo a buscar'
+
+Para buscar archivos binarios.
+
+    $ whereis 'nombre del comando'
+
+Podemos hacer una busqueda con criterios
+
+    $ find / -user idt -perm 400 -type f -mime +7
+
+## Herramientas para interactuar a través de HTTP
+
+    $ curl 'Dominio'
+
+    $ curl -v 'Dominio'
+
+    $ wget 'Dominio del archivo a descargar'
+
