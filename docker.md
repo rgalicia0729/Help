@@ -36,24 +36,32 @@ Un contenedor ejecuta sus procesos de forma nativa
 
 ### Dockerfile
 
-Para crear imagenes de docker las instrucciones se escriben en un archivo que por lo general lleva como nombre dockerfile. A continuación un ejemplo de las instrucciones basicas que contiene un archivo dockerfile para crear una imagen personalizada.
+Para crear imagenes de docker las instrucciones se escriben en un archivo que por lo general lleva como nombre Dockerfile. A continuación un ejemplo del uso de las intrucciones del archivo Dockerfile.
 
 ```
-FROM centos
+FROM 'sistema operativo | imagen base'
 
-RUN yum install httpd -y
+LABEL 'agregar etiquetas a la imagen, metadata de la imagen'
 
-CMD apachectl -DFOREGROUND
+RUN 'instrucciones de linea de comandos que se desean ejecutar al momento de crear'
+
+ENV 'clave' 'valor'
+
+WORKDIR 'path base del contenedor'
+
+COPY 'archivos de nuestro ordenador' 'ruta del contenedor'
+
+ADD 'dirección del archivo' 'ruta del contenedor'
+
+EXPOSE 'puerto que se desea exponer'
+
+USER 'el usuario que ejecute la tarea'
+
+CMD 'ejecuta un proceso en primer plano | puede ser un script'
 
 ```
 
-- FROM -> Es el sistema operativo que va a ejecutar el contenedor
-
-- RUN -> Instrucción para instalar el software al sistema operativo
-
-- CMD -> Instrucción para ejecutar el software en primer plano
-
-Luego de crear el archivo dockerfile con las instrucciones necesarias para crear una imagen personalizada, ejecutamos el siguiente comando para construir la imagen.
+Luego de crear el archivo Dockerfile con las instrucciones necesarias para crear una imagen personalizada, ejecutamos el siguiente comando para construir la imagen.
 
     $ docker build --tag 'nombre-imagen' .
 
@@ -62,7 +70,3 @@ Luego de crear el archivo dockerfile con las instrucciones necesarias para crear
 Podemos ver el historial de la imagen como fue creada con el siguiente comando.
 
     $ docker history -H 'nombre-imagen'
-
-
-
-
