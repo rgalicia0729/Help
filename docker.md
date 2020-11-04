@@ -10,6 +10,8 @@ A la hora de hacer aplicaciones y proyectos de software nos podemos encontrar co
 
 Docker promete ser la solución a todo nuestros problemas de una manera simple y sencilla.
 
+Docker nos permite construir, distribuir y ejecutar cualquier aplicación en cualquier lado.
+
 ## Instalación de Docker
 
 Vamos a ver cómo podemos instalar Docker en diferentes sistemas operativos, tendrás el enlace en los archivos de esta clase.
@@ -31,6 +33,40 @@ Vamos a ver cómo podemos instalar Docker en diferentes sistemas operativos, ten
 Los contenedores son el concepto fundamentalal hablar de docker. Un contenedor es una entidad lógica, una agrupación de procesos que se ejecutan de forma nativa como cualquier otra aplicación en la máquina host.
 
 Un contenedor ejecuta sus procesos de forma nativa
+
+## Comandos de docker
+
+    Ver la versión de docker
+    $ docker --version
+
+    Ver la información de configuración de docker
+    $ docker info
+
+    Ver los contenedores que estan corriendo
+    $ docker ps
+
+    Ver todos los contenedores
+    $ docker ps -a
+
+    Ver la información de un contenedor
+    $ docker inspect <CONTAINER ID || NAME>
+
+    Renombrar un contenedor
+    $ docker rename <NOMBRE_ACTUAL> <NUEVO_NOMBRE>
+
+    Eliminar un contenedor
+    $ docker rm <CONTAINER ID || NAME>
+
+    Eliminar todos los contenedores que estan parados
+    $ docker container prune
+
+    Ejecutar un contenedor
+
+    $ docker run <IMAGE NAME>
+
+        - --name <nombre de la imagen>
+        - --port <puerto del contenedor>:<puerto exterior>
+        - -it 'Ejecutar un contenedor en modo interactivo' 
 
 ## Crear imagenes propias
 
@@ -70,3 +106,5 @@ Luego de crear el archivo Dockerfile con las instrucciones necesarias para crear
 Podemos ver el historial de la imagen como fue creada con el siguiente comando.
 
     $ docker history -H 'nombre-imagen'
+
+
