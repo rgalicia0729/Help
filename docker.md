@@ -57,16 +57,40 @@ Un contenedor ejecuta sus procesos de forma nativa
     Eliminar un contenedor
     $ docker rm <CONTAINER ID || NAME>
 
+    Eliminar un contenedor que este corriendo
+    $ docker rm -f <CONTAINER ID || NAME>
+
     Eliminar todos los contenedores que estan parados
     $ docker container prune
 
     Ejecutar un contenedor
-
     $ docker run <IMAGE NAME>
+        --name <nombre de la imagen>
+        -p <puerto de la maquina>:<puerto del contenedor>
+        -it 'Ejecutar un contenedor en modo interactivo'
+        --detach || -d ejecuta el contenedor en background
 
-        - --name <nombre de la imagen>
-        - --port <puerto del contenedor>:<puerto exterior>
-        - -it 'Ejecutar un contenedor en modo interactivo' 
+    Ejecutar el bash de un contenedor que este corriendo con linux 
+    $ docker exec -it <NAME> bash
+
+    Obtener el process id del main process que se ejecuta en un contenedor
+    $ docker inspect --format '{{.State.Pid}}' <NAME>
+
+    Si se ejecuta docker en un sistema operativo linux se puede matar el proceso 
+    $ kill -9 <PROCESS ID>
+
+    Detener un contenedor
+    $ docker stop <CONTAINER ID || NAME>
+
+    Ver los logs de un contenedor
+    $ docker logs <CONTAINER ID || NAME>
+
+    Ver los logs a medida que se esten generando
+    $ docker logs -f <CONTAINER ID || NAME>
+
+    Ver las ultimas N lineas de logs
+    $ docker logs --tail N -f <CONTAINER ID || NAME>
+
 
 ## Crear imagenes propias
 
