@@ -111,6 +111,19 @@ Un contenedor ejecuta sus procesos de forma nativa
     Extraer un archivo que está dentro del contenedor, al sistema operativo de la maquina.
     $ docker cp <Nombre del contenedor>:<Nombre del archivo a extraer> <ruta de la maquina>
 
+    Listar las imagenes
+    $ docker image ls || docker images
+
+    Descargar una imagen de un servidor (docker hub)
+    $ docker pull <nombre de la imagen>:<version de la imagen>
+
+    Cambiar el tag de una imagen
+    $ docker tag <nombre actual> <nuevo nombre>
+
+    Subir imagenes a docker hub
+    $ docker login
+    $ docker push <nombre de la imagen>
+
 ## Crear imagenes propias
 
 ### Dockerfile
@@ -142,12 +155,11 @@ CMD 'ejecuta un proceso en primer plano | puede ser un script'
 
 Luego de crear el archivo Dockerfile con las instrucciones necesarias para crear una imagen personalizada, ejecutamos el siguiente comando para construir la imagen.
 
-    $ docker build --tag 'nombre-imagen' .
+    $ docker build --tag <nombre imagen> .
 
-    $ docker build -t 'nombre-imagen':'version' .
+    $ docker build -t <nombre imagen>:<version> .
 
 Podemos ver el historial de la imagen como fue creada con el siguiente comando.
 
     $ docker history -H 'nombre-imagen'
-
 
