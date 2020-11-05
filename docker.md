@@ -69,6 +69,8 @@ Un contenedor ejecuta sus procesos de forma nativa
         -p <puerto de la maquina>:<puerto del contenedor>
         -it 'Ejecutar un contenedor en modo interactivo'
         --detach || -d ejecuta el contenedor en background
+        -v bind mounts <directorio de la maquina>:<directorio del contenedor>
+        --mount src=<Nombre del volumen>,dst=<directorio del contenedor>
 
     Ejecutar el bash de un contenedor que este corriendo con linux 
     $ docker exec -it <NAME> bash
@@ -91,6 +93,23 @@ Un contenedor ejecuta sus procesos de forma nativa
     Ver las ultimas N lineas de logs
     $ docker logs --tail N -f <CONTAINER ID || NAME>
 
+    Listar volumenes
+    $ docker volume ls
+
+    Crear un nuevo volumen
+    $ docker volume create <Nombre del volumen>
+
+    Eliminar un volumen
+    $ docker volume rm <NAME>
+
+    Eliminar todos los volumenes que ya no se estan utilizando
+    $ docker volume prune
+
+    Copiar un archivo dentro de un contenedor
+    $ docker cp <Fichero a copiar> <Nombre del contenedor>:<Directorio del contenedor>
+
+    Extraer un archivo que está dentro del contenedor, al sistema operativo de la maquina.
+    $ docker cp <Nombre del contenedor>:<Nombre del archivo a extraer> <ruta de la maquina>
 
 ## Crear imagenes propias
 
