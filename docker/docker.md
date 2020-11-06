@@ -71,6 +71,7 @@ Un contenedor ejecuta sus procesos de forma nativa
         --detach || -d ejecuta el contenedor en background
         -v bind mounts <directorio de la maquina>:<directorio del contenedor>
         --mount src=<Nombre del volumen>,dst=<directorio del contenedor>
+        --env <ENVIRONMENT VARIABLE> = <VALUE>
 
     Ejecutar el bash de un contenedor que este corriendo con linux 
     $ docker exec -it <NAME> bash
@@ -124,6 +125,44 @@ Un contenedor ejecuta sus procesos de forma nativa
     $ docker login
     $ docker push <nombre de la imagen>
 
+    Listar las redes de docker
+    $ docker network ls
+
+    Crear una nueva red que permita que otros contenedores se conecten a ella
+    $ docker network create --attachable <Nombre de la red>
+
+    Ver la configuracion de una red
+    $ docker network inspect <Nombre de la red>
+
+    Conectar un contenedor a una red
+    $ docker network connect <nombre de la red> <nombre del contenedor>
+
+## Comandos de docker compose
+
+    Ejecutar docker compose
+    $ docker-compose up || docker-compose up -d
+
+    Ver los contenedores que se estan ejecutando con docker compose
+    $ docker-compose ps
+
+    Ver los logs de los servicios de docker compose
+    $ docker-compose logs
+
+    Ver los logs de un servicio de docker compose
+    $ docker-compose logs <Nombre del servicio>
+
+    Ver los logs de dos o mas servicios de docker compose
+    $ docker-compose logs <Nombre del servicio 1> <Nombre del servicio 2>
+
+    Ver las ultimas lineas de logs de los servicios docker compose
+    $ docker-compose logs -f <Nombre del servicio>
+
+    Correr un comando en un contenedor de docker compose
+    $ docker-compose exec <Nombre del servicio>
+
+    Destruir todo el ambiente de docker compose
+    $ docker-compose down
+
 ## Crear imagenes propias
 
 ### Dockerfile
@@ -150,7 +189,6 @@ EXPOSE 'puerto que se desea exponer'
 USER 'el usuario que ejecute la tarea'
 
 CMD 'ejecuta un proceso en primer plano | puede ser un script'
-
 ```
 
 Luego de crear el archivo Dockerfile con las instrucciones necesarias para crear una imagen personalizada, ejecutamos el siguiente comando para construir la imagen.
