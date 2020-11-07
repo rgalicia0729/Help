@@ -163,6 +163,12 @@ Un contenedor ejecuta sus procesos de forma nativa
     Destruir todo el ambiente de docker compose
     $ docker-compose down
 
+    Build de los servicios de docker compose
+    $ docker-compose build
+
+    Hacer build de un servicio de docker compose
+    $ docker-compose build <Nombre del servicio>
+
 ## Crear imagenes propias
 
 ### Dockerfile
