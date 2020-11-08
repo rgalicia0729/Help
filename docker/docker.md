@@ -72,6 +72,7 @@ Un contenedor ejecuta sus procesos de forma nativa
         -v bind mounts <directorio de la maquina>:<directorio del contenedor>
         --mount src=<Nombre del volumen>,dst=<directorio del contenedor>
         --env <ENVIRONMENT VARIABLE> = <VALUE>
+        --memory 1g limita la memoria a 1G
 
     Ejecutar el bash de un contenedor que este corriendo con linux 
     $ docker exec -it <NAME> bash
@@ -168,6 +169,27 @@ Un contenedor ejecuta sus procesos de forma nativa
 
     Hacer build de un servicio de docker compose
     $ docker-compose build <Nombre del servicio>
+
+    Escalar docker compose
+    $ docker-compose up -d --scale app=2
+
+## Administrar el ambiente de docker
+
+    Eliminar todos los contenedors, esten o no corriendo
+    $ docker rm -f $(docker ps -aq)
+
+    Limpiar todo el ambiente (contenedores, imagenes, volumenes y networks)
+    $ docker system prune
+
+    Ver el recurso que esta consumiendo los contenedores y docker
+    $ docker stats
+
+    Matar el proceso principal del contenedor de una
+    $ docker kill <Nombre del contenedor>
+
+## Contexto de build
+
+    Optimizar el proceso de build dejando de lado los archivos que no son necesarios que esten dentro de una imagen de docker, para esto se puede utilizar el archivo .dockerignore.
 
 ## Crear imagenes propias
 
