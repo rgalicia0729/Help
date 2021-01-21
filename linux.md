@@ -53,7 +53,7 @@ Fuente: https://blog.desdelinux.net/mas-de-400-comandos-para-gnulinux-que-deberi
 - **ls -F:** ver los ficheros de un directorio.
 - **ls -l:** mostrar los detalles de ficheros y carpetas de un directorio.
 - **ls -a:** mostrar los ficheros ocultos.
-- **ls *[0-9]*:** mostrar los ficheros y carpetas que contienen números.
+- **ls \*[0-9]\*:** mostrar los ficheros y carpetas que contienen números.
 - **tree:** mostrar los ficheros y carpetas en forma de árbol comenzando por la raíz.
 - **lstree:** mostrar los ficheros y carpetas en forma de árbol comenzando por la raíz.
 - **mkdir dir1:** crear una carpeta o directorio con nombre ‘dir1’.
@@ -83,12 +83,12 @@ Fuente: https://blog.desdelinux.net/mas-de-400-comandos-para-gnulinux-que-deberi
 
 - **find / -name file1:** buscar fichero y directorio a partir de la raíz del sistema.
 - **find / -user user1:** buscar ficheros y directorios pertenecientes al usuario ‘user1’.
-- **find /home/user1 -name \*.bin:** buscar ficheros con extensión ‘. bin’ dentro del directorio ‘/ home/user1’.
+- **find /home/user1 -name \\*.bin:** buscar ficheros con extensión ‘. bin’ dentro del directorio ‘/ home/user1’.
 - **find /usr/bin -type f -atime +100:** buscar ficheros binarios no usados en los últimos 100 días.
 - **find /usr/bin -type f -mtime -10:** buscar ficheros creados o cambiados dentro de los últimos 10 días.
-- **find / -name \*.rpm -exec chmod 755 ‘{}’ \;:** buscar ficheros con extensión ‘.rpm’ y modificar permisos.
-- **find / -xdev -name \*.rpm:** Buscar ficheros con extensión ‘.rpm’ ignorando los dispositivos removibles como cdrom, pen-drive, etc.…
-- **locate \*.ps:** encuentra ficheros con extensión ‘.ps’ ejecutados primeramente con el command ‘updatedb’.
+- **find / -name \\*.rpm -exec chmod 755 ‘{}’ \;:** buscar ficheros con extensión ‘.rpm’ y modificar permisos.
+- **find / -xdev -name \\*.rpm:** Buscar ficheros con extensión ‘.rpm’ ignorando los dispositivos removibles como cdrom, pen-drive, etc.…
+- **locate \\*.ps:** encuentra ficheros con extensión ‘.ps’ ejecutados primeramente con el command ‘updatedb’.
 - **whereis halt:** mostrar la ubicación de un fichero binario, de ayuda o fuente. En este caso pregunta dónde está el comando ‘halt’.
 - **which halt:** mostrar la senda completa (el camino completo) a un binario / ejecutable.
 
