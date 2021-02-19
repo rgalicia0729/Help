@@ -39,6 +39,7 @@ Los contenedores son:
 - **docker run -p \<puerto-de-anfitrion\>:\<puerto-de-contenedor\>:** Exponer un contenedor
 - **docker run -v \<directorio-anfitrion\>:\<directorio-contenedor\>:** Bind mounts
 - **docker run --mount src=\<volume-name\>,dst=\<path-container\>:** Montar un volumen a un contenedor
+- **docker run --env \<ENV_NAME\>=\<env-value\>:** Agregar una variable de entorno al contenedor
 - **docker volume ls:** Lista todos los volumenes
 - **docker volume create \<volume-id\>:** Crear un volumen personalizado
 - **docker volume rm \<volume-id\>:** Eliminar un volumen
@@ -53,6 +54,13 @@ Los contenedores son:
 - **docker pull \<image-name\>:\<image-version\>:** Descargar una imagen del repositorio
 - **docker push \<image-name\>:\<image-version\>:** Subir una imagen a docker hub
 - **docker build -t \<image-name\>:\<version\> \<build-context\>:** Construir una imagen
+- **docker history \<image-name\>:\<version\ >** Ver el historial de capas de construcción de una imagen
+- **docker network ls:** Muestra el listado de redes de docker
+- **docker network create --attachable \<network-name\>:** Crear una nueva red en docker
+- **docker network inspect \<network-name\>:** Inspeccionar los atributos de una red
+- **docker network connect \<network-name\> \<container-name\>:** Conectar un contenedor a un red
+- **docker network rm \<network-name\>:** Eliminar una red de docker
+
 
 # Docker Swarm
 
