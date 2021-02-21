@@ -60,6 +60,15 @@ Los contenedores son:
 - **docker network inspect \<network-name\>:** Inspeccionar los atributos de una red
 - **docker network connect \<network-name\> \<container-name\>:** Conectar un contenedor a un red
 - **docker network rm \<network-name\>:** Eliminar una red de docker
+- **docker-compose up -d:** Ejecutar un servicio compose
+- **docker-compose ps:** Listar los contenedores creados con servicios compose
+- **docker-compose logs:** Mostrar los logs de todos los servicio compose
+- **docker-compose logs \<service-name\>:** Muestra los logs de un servicio compose
+- **docker-compose logs -f \<service-name\>:** Muestra los logs de un servicio compose en tiempo real
+- **docker-compose exec \<service-name\> \<comando\>:** Ejecutar un comando en un servicio compose
+- **docker-compose down:** Elimina servicios compose
+- **docker-compose build:** Construye una imagen de un servicios especificado como build
+- **docker-compose up -d --scale \<service-name\>=\<cantidad\>:** Escalar un servicio a n cantidades
 
 
 # Docker Swarm
