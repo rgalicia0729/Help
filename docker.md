@@ -25,11 +25,14 @@ Los contenedores son:
 - **docker info:** Ver información sobre docker
 - **docker ps:** Muestra los contenedores que estan corriendo
 - **docker ps -a:** Muestra todos los contenedores
+- **docker ps -aq:** Muestra todos los contenedores solo sus ids
+- **docker stats:** Muestra lo que se esta ejecutando en docker
 - **docker inspect \<container-id\>:** Muestra la información del contenedor
 - **docker logs \<container-id\>:** Ver los logs del contenedor
 - **docker logs -f \<container-id\>:** Ver los logs del contenedor en tiempo real
 - **docker logs --tail 10 -f \<container-id\>:** Ver las ultimas 10 lineas del log
 - **docker stop \<container-id\>:** Detiene el main proces de un contenedor
+- **docker kill \<container-id\>:** Mata el proceso de docker
 - **docker start \<container-id\>:** Inicia el main proces de un contenedor
 - **docker rename \<nombre-actual\> \<nuevo-nombre\>:** Cambiar el nombre a un contenedor
 - **docker run \<image-name\>:** Crea y corre un contenedor a partir de la imagen
@@ -40,6 +43,7 @@ Los contenedores son:
 - **docker run -v \<directorio-anfitrion\>:\<directorio-contenedor\>:** Bind mounts
 - **docker run --mount src=\<volume-name\>,dst=\<path-container\>:** Montar un volumen a un contenedor
 - **docker run --env \<ENV_NAME\>=\<env-value\>:** Agregar una variable de entorno al contenedor
+- **docker run --memory 1g:** Limita al contenedor a utilizar solo un 1G de memoria
 - **docker volume ls:** Lista todos los volumenes
 - **docker volume create \<volume-id\>:** Crear un volumen personalizado
 - **docker volume rm \<volume-id\>:** Eliminar un volumen
@@ -47,6 +51,8 @@ Los contenedores son:
 - **docker rm \<container-id\>:** Eliminar un contenedor
 - **docker rm -f \<container-id\>:** Elimina un contenedor auque este corriendo
 - **docker container prune:** Eliminar todos los contenedores que estan apagados
+- **docker rm -f $(docker ps -aq):** Elimina todos los contenedores
+- **docker system prune:** Limpia en la medida posible todo el ambiente de docker
 - **docker cp \<file-name\> \<container-name\>:\<path-file\>:** Copiar un archivo al contenedor
 - **docker cp \<container-name\>:\<path-file\> \<file-name\>:** Copiar un archivo del contenedor
 - **docker images:** Mostrar el listado de imagenes
@@ -70,7 +76,6 @@ Los contenedores son:
 - **docker-compose build:** Construye una imagen de un servicios especificado como build
 - **docker-compose up -d --scale \<service-name\>=\<cantidad\>:** Escalar un servicio a n cantidades
 
-
 # Docker Swarm
 
 ## Preparando tus aplicaciones para Docker Swarm: los 12 factores
@@ -87,4 +92,15 @@ Los contenedores son:
 - **Dev/Prod parity :** lograr que tu aplicación sea lo más parecido a lo que estará en producción
 - **Logs :** todos los logs deben tratarse como flujos de bytes
 - **Admin processes :** la aplicación tiene que poder ser ejecutable como procesos independientes de la aplicación
+
+## Comandos de docker swarm
+
+- **docker swarm init:** Iniciar docker en modo swarm
+- **docker node ls:** Lista los nodos en docker swarm
+- **docker node inspect \<node-id\>:** Muestra la información de un nodo de swarm
+- **docker swarm leave:** Abandonar swarm
+- **docker swarm leave -f:** Abandonar swarm desde un manager
+- **docker swarm leave --force:** Abandonar swarm desde un manager
+- **docker service create:** Crear un nuevo servicio
+- **docker service ls:** Listar todos los servicios
 
