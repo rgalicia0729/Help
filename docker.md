@@ -35,10 +35,11 @@ Los contenedores son:
 - **docker create \<image-name\>:** Crea un contenedor de docker pero no lo ejecuta
 - **docker start \<container-id\>:** Ejecuta un contenedor de docker
 - **docker stop \<container-id\>:** Detiene el main proces de un contenedor
+- **docker kill \<container-id\>:** Mata el proceso principal del contenedor
 - **docker run \<image-name\>:** Crea y ejecuta un contenedor
 - **docker run \<image-name\> \<command\>:** Ejecuta un contenedor y anula el comando predeterminado
 - **docker run --name \<docker-name\> \<image-name\>:** Agrega un nombre al contenedor
-- **docker run -it \<image-name\>:** Correr un contenedor en modo interactivo 
+- **docker run -it \<image-name\> \<command\>:** Correr un contenedor en modo interactivo 
 - **docker run -d \<image-name\>:** Ejecuta un contenedor en modo background | detach
 - **docker run -p \<puerto-de-anfitrion\>:\<puerto-de-contenedor\> \<image-name\>:** Exponer un contenedor
 - **docker run -v \<directorio-anfitrion\>:\<directorio-contenedor\> \<image-name\>:** Bind mounts
@@ -49,9 +50,8 @@ Los contenedores son:
 - **docker logs \<container-id\>:** Ver los logs del contenedor
 - **docker logs -f \<container-id\>:** Ver los logs del contenedor en tiempo real
 - **docker logs --tail 10 -f \<container-id\>:** Ver las ultimas 10 lineas del log
-- **docker kill \<container-id\>:** Mata el proceso principal del contenedor
 - **docker rename \<nombre-actual\> \<nuevo-nombre\>:** Cambiar el nombre a un contenedor
-- **docker exec:** Ejecuta un nuevo comando en un contenedor en ejecución
+- **docker exec -it \<container-id\> \<command\>:** Ejecuta un nuevo comando en un contenedor en ejecución
 - **docker rm \<container-id\>:** Eliminar un contenedor
 - **docker rm -f \<container-id\>:** Elimina un contenedor auque este corriendo
 - **docker container prune:** Eliminar todos los contenedores que estan apagados
