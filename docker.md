@@ -1,5 +1,9 @@
 # Docker
 
+Install Docker for mac using homebrew
+
+    brew install --cask docker
+
 Problemas del desarrollo de software profesional (Los tres grandes problemas).
 
 - Construir
@@ -89,3 +93,5 @@ Los contenedores son:
 - **docker-compose down:** Elimina servicios compose
 - **docker-compose build:** Construye una imagen de un servicios especificado como build
 - **docker-compose up -d --scale \<service-name\>=\<cantidad\>:** Escalar un servicio a n cantidades
+
+# Kubernetes
